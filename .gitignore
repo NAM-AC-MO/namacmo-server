@@ -72,8 +72,8 @@ Temporary Items
 ### .yml .properties ###
 *.yml
 *.properties
-src/main/resources/credentials.json
-src/main/resources/log4j2.xml
+**/src/main/resources/credentials.json
+**/src/main/resources/log4j2.xml
 **/docker-compose.yaml
 !gradle/wrapper/gradle-wrapper.properties
 
