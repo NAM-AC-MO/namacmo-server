@@ -79,3 +79,7 @@ Temporary Items
 
 ### QueryDSL ###
 **/src/main/generated
+
+# config-file 예외 규칙 (아래에 위치 시키기)
+!config-file/
+!config-file/*.yml
