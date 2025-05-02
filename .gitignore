@@ -70,7 +70,7 @@ Temporary Items
 *.icloud
 
 ### .yml .properties ###
-*.yml
+#*.yml -> 개발 초기 단계로써 잠시 해제
 *.properties
 **/src/main/resources/credentials.json
 **/src/main/resources/log4j2.xml
