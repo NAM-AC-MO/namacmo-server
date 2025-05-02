@@ -1,7 +1,23 @@
 spring:
   application:
     name: gateway
-  profiles:
-    active: gateway
+  cloud:
+    bus:
+      destination: payment-prod-event-config-event-json
+    config:
+      name: payment-gateway
+      fail-fast: true
+      retry:
+        initial-interval: 1000
+        max-attempts: 5
+        multiplier: 1.1
+      request-connect-timeout: 2000
+      request-read-timeout: 10000
   config:
     import: optional:configserver:http://localhost:8888
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, busrefresh

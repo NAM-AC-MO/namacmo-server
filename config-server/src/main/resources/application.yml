@@ -3,7 +3,11 @@ server:
 spring:
   application:
     name: config-server
+  kafka:
+    bootstrap-servers: http://localhost:9092
   cloud:
+    bus:
+      destination: payment-prod-event-config-event-json
     config:
       server:
         git:
@@ -15,4 +19,4 @@ management:
   endpoints:
     web:
       exposure:
-        include: refresh
+        include: refresh, busrefresh
