@@ -1,4 +1,4 @@
 com:
   htwo:
-    profile: client
-    region: kr
+    profile: dev
+    region: korea
