@@ -1,0 +1,53 @@
+group = 'com.namacmo.product'
+version = '1.0.0'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    // 공통 모듈
+    implementation project(':app-common')
+
+    // web
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    //mysql
+    runtimeOnly 'com.mysql:mysql-connector-j'
+
+    // config-server
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    implementation 'org.springframework.cloud:spring-cloud-starter-bus-kafka'
+
+    // eureka
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+
+    //validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+}
+
+ext {
+    set('springCloudVersion', "2024.0.1")
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+tasks.register("prepareKotlinBuildScriptModel"){}
+
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
