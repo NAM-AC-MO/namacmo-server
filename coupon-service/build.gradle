@@ -24,10 +24,6 @@ dependencies {
     //mysql
     runtimeOnly 'com.mysql:mysql-connector-j'
 
-    // config-server
-    implementation 'org.springframework.cloud:spring-cloud-starter-config'
-    implementation 'org.springframework.cloud:spring-cloud-starter-bus-kafka'
-
     // eureka
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 
