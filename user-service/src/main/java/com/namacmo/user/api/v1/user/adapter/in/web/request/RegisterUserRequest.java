@@ -1,4 +1,4 @@
-package com.namacmo.user.api.v1.user.adapter.in.web;
+package com.namacmo.user.api.v1.user.adapter.in.web.request;
 
 public record RegisterUserRequest(
     String streetAddress,

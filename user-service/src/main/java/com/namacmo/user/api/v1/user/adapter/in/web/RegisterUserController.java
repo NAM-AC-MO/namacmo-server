@@ -1,6 +1,7 @@
 package com.namacmo.user.api.v1.user.adapter.in.web;
 
 import com.namacmo.appcommon.WebAdapter;
+import com.namacmo.user.api.v1.user.adapter.in.web.request.RegisterUserRequest;
 import com.namacmo.user.api.v1.user.application.port.in.RegisterUserCommand;
 import com.namacmo.user.api.v1.user.application.port.in.RegisterUserUseCase;
 import com.namacmo.user.api.v1.user.domain.model.User;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
 public class RegisterUserController {
+
   private final RegisterUserUseCase registerUserUseCase;
 
   @PostMapping("/users")

@@ -1,6 +1,8 @@
 package com.namacmo.user.api.v1.user.application.service;
 
 import com.namacmo.appcommon.UseCase;
+import com.namacmo.user.api.v1.user.adapter.out.persistence.entity.UserJpaEntity;
+import com.namacmo.user.api.v1.user.adapter.out.persistence.mapper.RegisterUserMapper;
 import com.namacmo.user.api.v1.user.application.port.in.RegisterUserCommand;
 import com.namacmo.user.api.v1.user.application.port.in.RegisterUserUseCase;
 import com.namacmo.user.api.v1.user.application.port.out.RegisterUserPort;
@@ -14,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 public class RegisterUserService implements RegisterUserUseCase {
 
   private final RegisterUserPort registerUserPort;
+  private final RegisterUserMapper mapper;
 
   @Override
   public User registerUser(RegisterUserCommand command) {
@@ -30,7 +33,9 @@ public class RegisterUserService implements RegisterUserUseCase {
         .name(command.getName())
         .phone(command.getPhone())
         .build();
-    registerUserPort.registerUser(userProfile);
-    return null;
+
+    final UserJpaEntity userJpaEntity = registerUserPort.registerUser(userProfile);
+    return mapper.mapToDomain(userJpaEntity);
   }
+
 }

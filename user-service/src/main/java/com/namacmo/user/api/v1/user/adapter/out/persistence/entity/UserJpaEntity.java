@@ -1,5 +1,6 @@
 package com.namacmo.user.api.v1.user.adapter.out.persistence.entity;
 
+import com.namacmo.user.api.v1.user.domain.event.UserRegisteredEvent;
 import com.namacmo.user.api.v1.user.domain.model.Role;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
@@ -14,6 +15,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -21,12 +23,13 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.domain.AbstractAggregateRoot;
 
 @Entity
-@Getter
 @Table(name = "users")
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class UserJpaEntity {
+public class UserJpaEntity extends AbstractAggregateRoot<UserJpaEntity> {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long userId;
@@ -58,6 +61,18 @@ public class UserJpaEntity {
     this.email = email;
     this.name = name;
     this.phone = phone;
+  }
+
+  public void publishUserRegisteredEvent() {
+    registerEvent(new UserRegisteredEvent(String.valueOf(userId)));
+  }
+
+  public void addRole(Role role) {
+    roles.add(role);
+  }
+
+  public Set<Role> getRoles() {
+    return Collections.unmodifiableSet(roles);
   }
 
   @Override

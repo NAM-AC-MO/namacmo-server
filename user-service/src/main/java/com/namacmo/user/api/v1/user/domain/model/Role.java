@@ -8,5 +8,6 @@ public enum Role {
   USER_ADMIN,
   ORDER_ADMIN,
   DELIVERY_ADMIN,
-  PAYMENT_ADMIN
+  PAYMENT_ADMIN,
+  USER
 }
