@@ -1,4 +1,4 @@
-group = 'com.payment.eureka'
+group = 'com.namacmo.eureka'
 version = '1.0.0'
 
 java {

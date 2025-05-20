@@ -1,4 +1,4 @@
-group = 'com.payment.gateway'
+group = 'com.namacmo.gateway'
 version = '1.0.0'
 
 java {

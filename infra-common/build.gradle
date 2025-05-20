@@ -1,4 +1,4 @@
-group = 'com.payment.infra-common'
+group = 'com.namacmo.infra-common'
 version = '1.0.0'
 
 java {

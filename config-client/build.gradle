@@ -1,4 +1,4 @@
-group = 'com.payment.config-client'
+group = 'com.namacmo.config-client'
 version = '1.0.0'
 
 java {

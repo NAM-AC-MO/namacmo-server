@@ -1,4 +1,4 @@
-group = 'com.payment.app-common'
+group = 'com.namacmo.app-common'
 
 java {
     toolchain {
