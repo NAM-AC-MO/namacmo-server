@@ -1,4 +1,4 @@
-package com.namacmo.user.api.v1.adapter.out.persistence;
+package com.namacmo.user.api.v1.adapter.out.persistence.entity;
 
 import com.namacmo.user.api.v1.domain.Role;
 import jakarta.persistence.CascadeType;
@@ -16,9 +16,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -51,7 +55,20 @@ public class UserJpaEntity {
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<UserLevelJpaEntity> userLevels = new HashSet<>();
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<RewardPointHistoryJpaEntity> userRewardPoints = new HashSet<>();
+  private List<RewardPointHistoryJpaEntity> userRewardPoints = new ArrayList<>();
+
+  @Builder
+  private UserJpaEntity(
+      AddressJpaVo address,
+      String email,
+      String name,
+      String phone
+  ) {
+    this.address = address;
+    this.email = email;
+    this.name = name;
+    this.phone = phone;
+  }
 
   // 편의 메서드
   public void addUserLevel(UserLevelJpaEntity userLevel) {
@@ -65,4 +82,20 @@ public class UserJpaEntity {
     userRewardPoint.setUserJpaEntity(this); // 연관관계 주인 쪽에도 설정
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    UserJpaEntity that = (UserJpaEntity) o;
+    return Objects.equals(userId, that.userId);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(userId);
+  }
 }
