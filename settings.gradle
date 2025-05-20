@@ -1,4 +1,4 @@
-rootProject.name = 'payment'
+rootProject.name = 'namacmo'
 include 'gateway-server'
 include 'eureka-server'
 include 'config-server'

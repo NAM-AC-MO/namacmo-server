@@ -11,7 +11,7 @@ repositories {
 }
 
 subprojects {
-	group = 'com.payment'
+	group = 'com.namacmo'
 	version = '1.0.0'
 	sourceCompatibility = '21'
 
