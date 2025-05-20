@@ -1,0 +1,44 @@
+services:
+  mysqldb:
+    image: mysql:latest
+    container_name: mysqldb-container
+    networks:
+      - namacmo_service_network
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: users
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: 1234
+    ports:
+      - "3306:3306"
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb-container
+    networks:
+      - namacmo_service_network
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 1234
+    ports:
+      - "27017:27017"
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express-container
+    networks:
+      - namacmo_service_network
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: 1234
+      ME_CONFIG_MONGODB_SERVER: mongodb
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: 1234
+    ports:
+      - "18081:8081"
+    depends_on:
+      - mongodb
+
+networks:
+  namacmo_service_network:
+    driver: bridge

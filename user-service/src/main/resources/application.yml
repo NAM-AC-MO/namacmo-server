@@ -1,0 +1,25 @@
+server:
+  port: 8091
+
+spring:
+  application:
+    name: member
+  datasource:
+    url: jdbc:mysql://localhost:3306/users?useUnicode=true&serverTimezone=Asia/Seoul
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
