@@ -20,6 +20,7 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     // 공통 모듈
     implementation project(':app-common')
+    implementation project(':infra-common')
     // web
     implementation 'org.springframework.boot:spring-boot-starter-web'
     //mysql
