@@ -1,7 +1,7 @@
 package com.namacmo.user.api.v1.user.adapter.out.persistence.entity;
 
-import com.namacmo.user.api.v1.user.domain.event.UserRegisteredEvent;
-import com.namacmo.user.api.v1.user.domain.model.Role;
+import com.namacmo.user.api.v1.user.adapter.out.persistence.valueobject.AddressJpaVo;
+import com.namacmo.user.api.v1.user.domain.valueobject.Role;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -23,16 +23,14 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.domain.AbstractAggregateRoot;
 
 @Entity
 @Table(name = "users")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class UserJpaEntity extends AbstractAggregateRoot<UserJpaEntity> {
+public class UserJpaEntity {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long userId;
+  private String userId;
   @Embedded
   private AddressJpaVo address;
   @Column(name = "email")
@@ -51,20 +49,20 @@ public class UserJpaEntity extends AbstractAggregateRoot<UserJpaEntity> {
   private Set<Role> roles = new HashSet<>();
 
   @Builder
-  private UserJpaEntity(
+  public UserJpaEntity(
+      String userId,
       AddressJpaVo address,
       String email,
       String name,
-      String phone
+      String phone,
+      Set<Role> roles
   ) {
+    this.userId = userId;
     this.address = address;
     this.email = email;
     this.name = name;
     this.phone = phone;
-  }
-
-  public void publishUserRegisteredEvent() {
-    registerEvent(new UserRegisteredEvent(String.valueOf(userId)));
+    this.roles = roles;
   }
 
   public void addRole(Role role) {

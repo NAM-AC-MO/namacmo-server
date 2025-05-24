@@ -1,4 +1,4 @@
-package com.namacmo.user.api.v1.user.adapter.out.persistence.entity;
+package com.namacmo.user.api.v1.user.adapter.out.persistence.valueobject;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

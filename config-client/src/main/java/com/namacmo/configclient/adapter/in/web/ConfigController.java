@@ -1,6 +1,6 @@
 package com.namacmo.configclient.adapter.in.web;
 
-import com.namacmo.appcommon.WebAdapter;
+import com.namacmo.appcommon.hexagonal.WebAdapter;
 import com.namacmo.configclient.config.ApplicationConfig;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

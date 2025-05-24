@@ -1,6 +1,6 @@
 package com.namacmo.user.api.v1.user.adapter.in.web;
 
-import com.namacmo.appcommon.WebAdapter;
+import com.namacmo.appcommon.hexagonal.WebAdapter;
 import com.namacmo.user.api.v1.user.adapter.in.web.request.RegisterUserRequest;
 import com.namacmo.user.api.v1.user.application.port.in.RegisterUserCommand;
 import com.namacmo.user.api.v1.user.application.port.in.RegisterUserUseCase;

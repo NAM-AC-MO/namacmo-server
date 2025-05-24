@@ -1,5 +1,6 @@
-package com.namacmo.user.api.v1.user.domain.model;
+package com.namacmo.user.api.v1.user.domain.valueobject;
 
+import com.namacmo.user.api.v1.user.domain.valueobject.Role;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;

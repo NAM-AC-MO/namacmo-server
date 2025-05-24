@@ -1,16 +1,37 @@
 package com.namacmo.user.api.v1.user.adapter.out.persistence.mapper;
 
-import com.namacmo.user.api.v1.user.adapter.out.persistence.entity.AddressJpaVo;
+import com.namacmo.user.api.v1.user.adapter.out.persistence.valueobject.AddressJpaVo;
 import com.namacmo.user.api.v1.user.adapter.out.persistence.entity.UserJpaEntity;
-import com.namacmo.user.api.v1.user.domain.model.Address;
-import com.namacmo.user.api.v1.user.domain.model.Roles;
+import com.namacmo.user.api.v1.user.domain.valueobject.Address;
+import com.namacmo.user.api.v1.user.domain.valueobject.Roles;
 import com.namacmo.user.api.v1.user.domain.model.User;
-import com.namacmo.user.api.v1.user.domain.model.UserNo;
-import com.namacmo.user.api.v1.user.domain.model.UserProfile;
+import com.namacmo.user.api.v1.user.domain.valueobject.UserId;
+import com.namacmo.user.api.v1.user.domain.valueobject.UserProfile;
 import org.springframework.stereotype.Component;
 
 @Component
 public class RegisterUserMapper {
+  public UserJpaEntity mapToJpaEntity(User user) {
+    final UserProfile userProfile = user.getUserProfile();
+    final Address address = userProfile.getAddress();
+
+    final AddressJpaVo addressJpaVo = AddressJpaVo.builder()
+        .streetAddress(address.getStreetAddress())
+        .detailAddress(address.getDetailAddress())
+        .city(address.getCity())
+        .zipCode(address.getZipCode())
+        .build();
+
+    return UserJpaEntity.builder()
+        .userId(user.getUserId().getValue())
+        .address(addressJpaVo)
+        .email(userProfile.getEmail())
+        .name(userProfile.getName())
+        .phone(userProfile.getPhone())
+        .roles(user.getRoles())
+        .build();
+  }
+
   public User mapToDomain(UserJpaEntity userEntity) {
     final AddressJpaVo addressVo = userEntity.getAddress();
     final Address address = Address.builder()
@@ -27,7 +48,7 @@ public class RegisterUserMapper {
         .build();
 
     return User.builder()
-        .userNo(new UserNo(String.valueOf(userEntity.getUserId())))
+        .userId(new UserId(userEntity.getUserId()))
         .userProfile(userProfile)
         .roles(new Roles(userEntity.getRoles()))
         .build();

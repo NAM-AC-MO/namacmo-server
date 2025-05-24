@@ -1,4 +1,4 @@
-package com.payment.appcommon.domain.entity;
+package com.namacmo.appcommon.domain.entity;
 
 import java.util.Objects;
 

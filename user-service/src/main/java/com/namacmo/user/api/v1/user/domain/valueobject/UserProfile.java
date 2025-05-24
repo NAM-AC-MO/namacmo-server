@@ -1,4 +1,4 @@
-package com.namacmo.user.api.v1.user.domain.model;
+package com.namacmo.user.api.v1.user.domain.valueobject;
 
 import java.util.Objects;
 import lombok.Builder;

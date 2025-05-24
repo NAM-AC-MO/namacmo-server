@@ -1,4 +1,4 @@
-package com.payment.appcommon.domain.event;
+package com.namacmo.appcommon.domain.event;
 
 /**
  * 도메인에서 해당 이벤트를 발생시키는 엔티티의 타입을 지정하기 위해 이벤트 객체에 마킹하는 클래스입니다.

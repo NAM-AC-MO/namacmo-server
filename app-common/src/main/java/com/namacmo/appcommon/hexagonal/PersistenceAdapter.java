@@ -1,4 +1,4 @@
-package com.namacmo.appcommon;
+package com.namacmo.appcommon.hexagonal;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Component
-public @interface WebAdapter {
+public @interface PersistenceAdapter {
 
   /**
    * The value may indicate a suggestion for a logical component name,

@@ -1,4 +1,4 @@
-package com.payment.appcommon.domain.exception;
+package com.namacmo.appcommon.domain.exception;
 
 public class DomainException extends RuntimeException {
 
