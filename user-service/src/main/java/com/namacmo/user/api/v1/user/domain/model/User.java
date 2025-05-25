@@ -1,5 +1,6 @@
 package com.namacmo.user.api.v1.user.domain.model;
 
+import com.namacmo.appcommon.domain.entity.AggregateRoot;
 import com.namacmo.user.api.v1.user.domain.valueobject.Role;
 import com.namacmo.user.api.v1.user.domain.valueobject.Roles;
 import com.namacmo.user.api.v1.user.domain.valueobject.UserId;
@@ -8,9 +9,7 @@ import java.util.Set;
 import lombok.Builder;
 import lombok.Getter;
 
-public class User {
-  @Getter
-  private final UserId userId;
+public class User extends AggregateRoot<UserId> {
   @Getter
   private final UserProfile userProfile;
   private final Roles roles;
@@ -25,7 +24,7 @@ public class User {
       UserProfile userProfile,
       Roles roles
   ) {
-    this.userId = userId;
+    super(userId);
     this.userProfile = userProfile;
     this.roles = roles;
   }
