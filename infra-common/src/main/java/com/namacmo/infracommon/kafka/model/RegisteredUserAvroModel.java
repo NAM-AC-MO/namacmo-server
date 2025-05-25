@@ -14,16 +14,13 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class RegisteredUserAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 6211382707674754752L;
+  private static final long serialVersionUID = -6555180607034043822L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"RegisteredUserAvroModel\",\"namespace\":\"com.namacmo.infracommon.kafka.model\",\"fields\":[{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"channelId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"createdAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"RegisteredUserAvroModel\",\"namespace\":\"com.namacmo.infracommon.kafka.model\",\"fields\":[{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"channelId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
-  static {
-    MODEL$.addLogicalTypeConversion(new org.apache.avro.data.TimeConversions.TimestampMillisConversion());
-  }
 
   private static final BinaryMessageEncoder<RegisteredUserAvroModel> ENCODER =
       new BinaryMessageEncoder<>(MODEL$, SCHEMA$);
@@ -78,7 +75,6 @@ public class RegisteredUserAvroModel extends org.apache.avro.specific.SpecificRe
 
   private java.lang.String userId;
   private java.lang.String channelId;
-  private java.time.Instant createdAt;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -91,12 +87,10 @@ public class RegisteredUserAvroModel extends org.apache.avro.specific.SpecificRe
    * All-args constructor.
    * @param userId The new value for userId
    * @param channelId The new value for channelId
-   * @param createdAt The new value for createdAt
    */
-  public RegisteredUserAvroModel(java.lang.String userId, java.lang.String channelId, java.time.Instant createdAt) {
+  public RegisteredUserAvroModel(java.lang.String userId, java.lang.String channelId) {
     this.userId = userId;
     this.channelId = channelId;
-    this.createdAt = createdAt.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
   }
 
   @Override
@@ -111,22 +105,8 @@ public class RegisteredUserAvroModel extends org.apache.avro.specific.SpecificRe
     switch (field$) {
     case 0: return userId;
     case 1: return channelId;
-    case 2: return createdAt;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
-  }
-
-  private static final org.apache.avro.Conversion<?>[] conversions =
-      new org.apache.avro.Conversion<?>[] {
-      null,
-      null,
-      new org.apache.avro.data.TimeConversions.TimestampMillisConversion(),
-      null
-  };
-
-  @Override
-  public org.apache.avro.Conversion<?> getConversion(int field) {
-    return conversions[field];
   }
 
   // Used by DatumReader.  Applications should not call.
@@ -136,7 +116,6 @@ public class RegisteredUserAvroModel extends org.apache.avro.specific.SpecificRe
     switch (field$) {
     case 0: userId = value$ != null ? value$.toString() : null; break;
     case 1: channelId = value$ != null ? value$.toString() : null; break;
-    case 2: createdAt = (java.time.Instant)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -173,23 +152,6 @@ public class RegisteredUserAvroModel extends org.apache.avro.specific.SpecificRe
    */
   public void setChannelId(java.lang.String value) {
     this.channelId = value;
-  }
-
-  /**
-   * Gets the value of the 'createdAt' field.
-   * @return The value of the 'createdAt' field.
-   */
-  public java.time.Instant getCreatedAt() {
-    return createdAt;
-  }
-
-
-  /**
-   * Sets the value of the 'createdAt' field.
-   * @param value the value to set.
-   */
-  public void setCreatedAt(java.time.Instant value) {
-    this.createdAt = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
   }
 
   /**
@@ -235,7 +197,6 @@ public class RegisteredUserAvroModel extends org.apache.avro.specific.SpecificRe
 
     private java.lang.String userId;
     private java.lang.String channelId;
-    private java.time.Instant createdAt;
 
     /** Creates a new Builder */
     private Builder() {
@@ -256,10 +217,6 @@ public class RegisteredUserAvroModel extends org.apache.avro.specific.SpecificRe
         this.channelId = data().deepCopy(fields()[1].schema(), other.channelId);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
-      if (isValidValue(fields()[2], other.createdAt)) {
-        this.createdAt = data().deepCopy(fields()[2].schema(), other.createdAt);
-        fieldSetFlags()[2] = other.fieldSetFlags()[2];
-      }
     }
 
     /**
@@ -275,10 +232,6 @@ public class RegisteredUserAvroModel extends org.apache.avro.specific.SpecificRe
       if (isValidValue(fields()[1], other.channelId)) {
         this.channelId = data().deepCopy(fields()[1].schema(), other.channelId);
         fieldSetFlags()[1] = true;
-      }
-      if (isValidValue(fields()[2], other.createdAt)) {
-        this.createdAt = data().deepCopy(fields()[2].schema(), other.createdAt);
-        fieldSetFlags()[2] = true;
       }
     }
 
@@ -362,45 +315,6 @@ public class RegisteredUserAvroModel extends org.apache.avro.specific.SpecificRe
       return this;
     }
 
-    /**
-      * Gets the value of the 'createdAt' field.
-      * @return The value.
-      */
-    public java.time.Instant getCreatedAt() {
-      return createdAt;
-    }
-
-
-    /**
-      * Sets the value of the 'createdAt' field.
-      * @param value The value of 'createdAt'.
-      * @return This builder.
-      */
-    public com.namacmo.infracommon.kafka.model.RegisteredUserAvroModel.Builder setCreatedAt(java.time.Instant value) {
-      validate(fields()[2], value);
-      this.createdAt = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
-      fieldSetFlags()[2] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'createdAt' field has been set.
-      * @return True if the 'createdAt' field has been set, false otherwise.
-      */
-    public boolean hasCreatedAt() {
-      return fieldSetFlags()[2];
-    }
-
-
-    /**
-      * Clears the value of the 'createdAt' field.
-      * @return This builder.
-      */
-    public com.namacmo.infracommon.kafka.model.RegisteredUserAvroModel.Builder clearCreatedAt() {
-      fieldSetFlags()[2] = false;
-      return this;
-    }
-
     @Override
     @SuppressWarnings("unchecked")
     public RegisteredUserAvroModel build() {
@@ -408,7 +322,6 @@ public class RegisteredUserAvroModel extends org.apache.avro.specific.SpecificRe
         RegisteredUserAvroModel record = new RegisteredUserAvroModel();
         record.userId = fieldSetFlags()[0] ? this.userId : (java.lang.String) defaultValue(fields()[0]);
         record.channelId = fieldSetFlags()[1] ? this.channelId : (java.lang.String) defaultValue(fields()[1]);
-        record.createdAt = fieldSetFlags()[2] ? this.createdAt : (java.time.Instant) defaultValue(fields()[2]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -436,6 +349,43 @@ public class RegisteredUserAvroModel extends org.apache.avro.specific.SpecificRe
     READER$.read(this, SpecificData.getDecoder(in));
   }
 
+  @Override protected boolean hasCustomCoders() { return true; }
+
+  @Override public void customEncode(org.apache.avro.io.Encoder out)
+    throws java.io.IOException
+  {
+    out.writeString(this.userId);
+
+    out.writeString(this.channelId);
+
+  }
+
+  @Override public void customDecode(org.apache.avro.io.ResolvingDecoder in)
+    throws java.io.IOException
+  {
+    org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
+    if (fieldOrder == null) {
+      this.userId = in.readString();
+
+      this.channelId = in.readString();
+
+    } else {
+      for (int i = 0; i < 2; i++) {
+        switch (fieldOrder[i].pos()) {
+        case 0:
+          this.userId = in.readString();
+          break;
+
+        case 1:
+          this.channelId = in.readString();
+          break;
+
+        default:
+          throw new java.io.IOException("Corrupt ResolvingDecoder.");
+        }
+      }
+    }
+  }
 }
 
 

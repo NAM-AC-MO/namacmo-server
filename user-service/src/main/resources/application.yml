@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: member
+    name: user
   config:
     import:
       - classpath:kafka-config.yml

@@ -32,7 +32,7 @@ public class KafkaProducerConfig<K extends Serializable, V extends SpecificRecor
 
     @Bean
     public Map<String, Object> producerConfig() {
-        log.info("KafkaConfigData={} KafkaProducerConfigData={}", kafkaConfigData, kafkaProducerConfigData);
+        log.info("KafkaProducerConfig -> KafkaConfigData={} KafkaProducerConfigData={}", kafkaConfigData, kafkaProducerConfigData);
         final Map<String, Object> props = new HashMap<>();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaConfigData.getBootstrapServers());
         props.put(kafkaConfigData.getSchemaRegistryUrlKey(), kafkaConfigData.getSchemaRegistryUrl());

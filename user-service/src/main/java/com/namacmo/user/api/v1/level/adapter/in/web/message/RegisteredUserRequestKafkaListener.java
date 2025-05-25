@@ -4,12 +4,15 @@ import com.namacmo.infracommon.kafka.consumer.KafkaConsumer;
 import com.namacmo.infracommon.kafka.model.RegisteredUserAvroModel;
 import com.namacmo.user.api.v1.level.application.dto.CreateUserLevelCommand;
 import com.namacmo.user.api.v1.level.application.port.in.RegisteredUserRequestMessageListener;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
@@ -24,28 +27,27 @@ public class RegisteredUserRequestKafkaListener implements KafkaConsumer<Registe
   @Override
   @KafkaListener(
       id = "${kafka.consumer.group.registered-user}",
-      topics = "${kafka.topics.user.registered}"
+      topics = "${kafka.topics.user.registered}",
+      containerFactory = "kafkaListenerContainerFactory"
   )
-  public void receive(
-      @Payload List<RegisteredUserAvroModel> messages,
-      @Header List<String> keys,
-      @Header List<Integer> partitions,
-      @Header List<Long> offsets
-  ) {
-    log.info("{} number of orders approval requests received with keys {}, partitions {} and offsets {}" +
-            ", sending for restaurant approval",
-        messages.size(),
-        keys.toString(),
-        partitions.toString(),
-        offsets.toString());
+  public void receive(List<ConsumerRecord<String, RegisteredUserAvroModel>> records) {
+    log.info("record size={}", records.size());
+    for (ConsumerRecord<String, RegisteredUserAvroModel> record : records) {
+      String key = record.key();
+      int partition = record.partition();
+      long offset = record.offset();
+      RegisteredUserAvroModel message = record.value();
 
-    messages.forEach(
-        record -> registeredUserRequestMessageListener.createUserLevel(
-            new CreateUserLevelCommand(
-              record.getUserId(),
-              record.getChannelId(),
-              LocalDateTime.ofInstant(record.getCreatedAt(), ZoneId.systemDefault())
-            )
-        ));
+      log.info("Received message: key={}, partition={}, offset={}", key, partition, offset);
+
+      registeredUserRequestMessageListener.createUserLevel(
+          new CreateUserLevelCommand(
+              message.getUserId(),
+              message.getChannelId(),
+              LocalDateTime.ofInstant(Instant.ofEpochMilli(record.timestamp()), ZoneId.systemDefault())
+          )
+      );
+
+    }
   }
 }

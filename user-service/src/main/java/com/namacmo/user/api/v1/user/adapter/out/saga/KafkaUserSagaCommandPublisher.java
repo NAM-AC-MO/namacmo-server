@@ -18,7 +18,7 @@ public class KafkaUserSagaCommandPublisher implements UserSagaCommandPublisher {
 
   @Override
   public void publish(UserRegisteredMessage message) {
-    RegisteredUserAvroModel model = new RegisteredUserAvroModel(message.userId(), topic, message.createdAt());
+    RegisteredUserAvroModel model = new RegisteredUserAvroModel(message.userId(), topic);
     kafkaProducer.send(topic, message.userId(), model);
   }
 }

@@ -23,7 +23,7 @@ public record Period(
         now.plusMonths(STANDARD_MONTHS)
             .withDayOfMonth(1)
             .minusDays(1)
-            .withHour(23).withMinute(59).withSecond(59).withNano(999_999_999)
+            .withHour(23).withMinute(59)
     );
   }
 

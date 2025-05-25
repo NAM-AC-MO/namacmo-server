@@ -14,13 +14,6 @@
       "type": {
         "type": "string"
       }
-    },
-    {
-      "name": "createdAt",
-      "type": {
-        "type": "long",
-        "logicalType": "timestamp-millis"
-      }
     }
   ]
 }

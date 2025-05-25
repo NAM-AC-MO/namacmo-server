@@ -2,7 +2,8 @@ package com.namacmo.infracommon.kafka.consumer;
 
 import java.util.List;
 import org.apache.avro.specific.SpecificRecordBase;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 
 public interface KafkaConsumer<T extends SpecificRecordBase> {
-    void receive(List<T> messages, List<String> keys, List<Integer> partitions, List<Long> offsets);
+    void receive(List<ConsumerRecord<String, T>> records);
 }
