@@ -1,4 +1,4 @@
-package com.namacmo.user.api.v1.level.domain.model;
+package com.namacmo.user.api.v1.level.domain.valueobject;
 
 import lombok.Getter;
 

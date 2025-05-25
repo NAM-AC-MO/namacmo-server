@@ -1,31 +1,25 @@
 {
   "namespace": "com.namacmo.infracommon.kafka.model",
   "type": "record",
-  "name": "UserAvroModel",
+  "name": "RegisteredUserAvroModel",
   "fields": [
     {
-      "name": "id",
-      "type": {
-        "type": "string",
-        "logicalType": "uuid"
-      }
-    },
-    {
-      "name": "username",
+      "name": "userId",
       "type": {
         "type": "string"
       }
     },
     {
-      "name": "firstName",
+      "name": "channelId",
       "type": {
         "type": "string"
       }
     },
     {
-      "name": "lastName",
+      "name": "createdAt",
       "type": {
-        "type": "string"
+        "type": "long",
+        "logicalType": "timestamp-millis"
       }
     }
   ]

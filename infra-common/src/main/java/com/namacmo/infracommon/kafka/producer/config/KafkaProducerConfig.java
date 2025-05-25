@@ -5,6 +5,7 @@ import com.namacmo.infracommon.kafka.config.KafkaProducerConfigData;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.springframework.context.annotation.Bean;
@@ -13,12 +14,12 @@ import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 
+@Slf4j
 @Configuration
 public class KafkaProducerConfig<K extends Serializable, V extends SpecificRecordBase> {
 
     private final KafkaConfigData kafkaConfigData;
     private final KafkaProducerConfigData kafkaProducerConfigData;
-
 
     public KafkaProducerConfig(
         KafkaConfigData kafkaConfigData,
@@ -31,6 +32,7 @@ public class KafkaProducerConfig<K extends Serializable, V extends SpecificRecor
 
     @Bean
     public Map<String, Object> producerConfig() {
+        log.info("KafkaConfigData={} KafkaProducerConfigData={}", kafkaConfigData, kafkaProducerConfigData);
         final Map<String, Object> props = new HashMap<>();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaConfigData.getBootstrapServers());
         props.put(kafkaConfigData.getSchemaRegistryUrlKey(), kafkaConfigData.getSchemaRegistryUrl());

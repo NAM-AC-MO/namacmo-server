@@ -23,7 +23,6 @@ public class RegisterUserAdapter implements RegisterUserPort {
         .ifPresent(findUser -> {
           throw new UserAlreadyExistsException(findUser.getEmail());
         });
-//    userJpaEntity.publishUserRegisteredEvent();
     return userJpaRepository.save(userJpaEntity);
   }
 }

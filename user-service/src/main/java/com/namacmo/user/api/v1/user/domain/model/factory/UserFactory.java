@@ -1,8 +1,7 @@
 package com.namacmo.user.api.v1.user.domain.model.factory;
 
-import com.namacmo.user.api.v1.user.domain.valueobject.Roles;
 import com.namacmo.user.api.v1.user.domain.model.User;
-import com.namacmo.user.api.v1.user.domain.valueobject.UserId;
+import com.namacmo.user.api.v1.user.domain.valueobject.Roles;
 import com.namacmo.user.api.v1.user.domain.valueobject.UserProfile;
 
 public final class UserFactory {
@@ -20,11 +19,7 @@ public final class UserFactory {
     final UserProfile profile = UserProfileFactory.of(streetAddress, detailAddress, city, zipCode, email, name, phone);
     final Roles roles = RolesFactory.of();
 
-    return User.builder()
-        .userId(new UserId())
-        .userProfile(profile)
-        .roles(roles)
-        .build();
+    return User.create(profile, roles);
   }
 }
 

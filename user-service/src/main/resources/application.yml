@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: member
+  config:
+    import:
+      - classpath:kafka-config.yml
+      - classpath:kafka-consumer-config.yml
+      - classpath:kafka-producer-config.yml
   datasource:
     url: jdbc:mysql://localhost:3306/users?useUnicode=true&serverTimezone=Asia/Seoul
     username: root
@@ -23,3 +28,11 @@ logging:
   level:
     org.hibernate.SQL: debug
     org.hibernate.type: trace
+
+kafka:
+  topics:
+    user:
+      registered: registered-user-request-v1
+  consumer:
+    group:
+      registered-user: registered-user-consumer-group

@@ -1,12 +1,10 @@
 package com.namacmo.user.api.v1.point.adapter.out.persistence.entity;
 
-import com.namacmo.user.api.v1.point.domain.model.PointType;
+import com.namacmo.user.api.v1.point.domain.valueobject.PointType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.util.Objects;
@@ -20,8 +18,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "reward_points_history")
 public class RewardPointHistoryJpaEntity {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long pointId;
+  private String pointId;
   @Column(nullable = false, name = "user_id")
   private Long userId;
   @Column(nullable = false, name = "related_order_id")

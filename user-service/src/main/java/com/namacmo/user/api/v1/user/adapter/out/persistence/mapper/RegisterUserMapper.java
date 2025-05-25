@@ -23,7 +23,7 @@ public class RegisterUserMapper {
         .build();
 
     return UserJpaEntity.builder()
-        .userId(user.getUserId().getValue())
+        .userId(user.getId().getValue())
         .address(addressJpaVo)
         .email(userProfile.getEmail())
         .name(userProfile.getName())

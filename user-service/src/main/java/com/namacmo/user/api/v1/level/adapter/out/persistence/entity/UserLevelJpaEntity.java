@@ -1,16 +1,19 @@
 package com.namacmo.user.api.v1.level.adapter.out.persistence.entity;
 
-import com.namacmo.user.api.v1.level.domain.model.LevelType;
+import com.namacmo.user.api.v1.common.Money;
+import com.namacmo.user.api.v1.level.adapter.out.persistence.MoneyToBigIntegerConvert;
+import com.namacmo.user.api.v1.level.domain.valueobject.LevelType;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -19,19 +22,38 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "user_levels")
 public class UserLevelJpaEntity {
+
   @Id
-  private Long userLevelId;
+  private String userLevelId;
   @Column(nullable = false, name = "user_id")
-  private Long userId;
+  private String userId;
   @Enumerated(value = EnumType.STRING)
   @Column(name = "level_type")
   private LevelType levelType;
   @Column(name = "total_spent")
-  private BigInteger totalSpent;
+  @Convert(converter = MoneyToBigIntegerConvert.class)
+  private Money totalSpent;
   @Column(name = "start_date")
   private LocalDateTime startDate;
   @Column(name = "end_date")
   private LocalDateTime endDate;
+
+  @Builder
+  private UserLevelJpaEntity(
+      String userLevelId,
+      String userId,
+      LevelType levelType,
+      Money totalSpent,
+      LocalDateTime startDate,
+      LocalDateTime endDate
+  ) {
+    this.userLevelId = userLevelId;
+    this.userId = userId;
+    this.levelType = levelType;
+    this.totalSpent = totalSpent;
+    this.startDate = startDate;
+    this.endDate = endDate;
+  }
 
   @Override
   public boolean equals(Object o) {
