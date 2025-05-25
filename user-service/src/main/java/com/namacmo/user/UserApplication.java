@@ -3,7 +3,7 @@ package com.namacmo.user;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.namacmo.infracommon.kafka"})
 public class UserApplication {
 
   public static void main(String[] args) {

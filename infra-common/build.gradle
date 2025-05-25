@@ -1,5 +1,11 @@
+plugins {
+    id "com.github.davidmc24.gradle.plugin.avro" version "1.9.1"
+}
+
 group = 'com.namacmo.infra-common'
 version = '1.0.0'
+bootJar.enabled = false
+jar.enabled = true
 
 java {
     toolchain {
@@ -12,8 +18,23 @@ repositories {
 }
 
 dependencies {
+    // kafka
+    implementation("org.springframework.kafka:spring-kafka")
+    implementation("org.apache.avro:avro:1.11.4")
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+generateAvroJava {
+    source("src/main/resources/avro/")
+    include("**/*.avsc")
+    outputDir = file("src/main/java")
+}
+
+avro {
+    fieldVisibility = "PRIVATE"
+    outputCharacterEncoding = "UTF-8"
 }
 
 ext {
