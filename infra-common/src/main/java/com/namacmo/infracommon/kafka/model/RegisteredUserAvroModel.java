@@ -14,13 +14,16 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class RegisteredUserAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -6555180607034043822L;
+  private static final long serialVersionUID = -7527399131894800723L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"RegisteredUserAvroModel\",\"namespace\":\"com.namacmo.infracommon.kafka.model\",\"fields\":[{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"channelId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"RegisteredUserAvroModel\",\"namespace\":\"com.namacmo.infracommon.kafka.model\",\"fields\":[{\"name\":\"eventId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"channelId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
+  static {
+    MODEL$.addLogicalTypeConversion(new org.apache.avro.Conversions.UUIDConversion());
+  }
 
   private static final BinaryMessageEncoder<RegisteredUserAvroModel> ENCODER =
       new BinaryMessageEncoder<>(MODEL$, SCHEMA$);
@@ -73,6 +76,7 @@ public class RegisteredUserAvroModel extends org.apache.avro.specific.SpecificRe
     return DECODER.decode(b);
   }
 
+  private java.util.UUID eventId;
   private java.lang.String userId;
   private java.lang.String channelId;
 
@@ -85,10 +89,12 @@ public class RegisteredUserAvroModel extends org.apache.avro.specific.SpecificRe
 
   /**
    * All-args constructor.
+   * @param eventId The new value for eventId
    * @param userId The new value for userId
    * @param channelId The new value for channelId
    */
-  public RegisteredUserAvroModel(java.lang.String userId, java.lang.String channelId) {
+  public RegisteredUserAvroModel(java.util.UUID eventId, java.lang.String userId, java.lang.String channelId) {
+    this.eventId = eventId;
     this.userId = userId;
     this.channelId = channelId;
   }
@@ -103,10 +109,24 @@ public class RegisteredUserAvroModel extends org.apache.avro.specific.SpecificRe
   @Override
   public java.lang.Object get(int field$) {
     switch (field$) {
-    case 0: return userId;
-    case 1: return channelId;
+    case 0: return eventId;
+    case 1: return userId;
+    case 2: return channelId;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
+  }
+
+  private static final org.apache.avro.Conversion<?>[] conversions =
+      new org.apache.avro.Conversion<?>[] {
+      new org.apache.avro.Conversions.UUIDConversion(),
+      null,
+      null,
+      null
+  };
+
+  @Override
+  public org.apache.avro.Conversion<?> getConversion(int field) {
+    return conversions[field];
   }
 
   // Used by DatumReader.  Applications should not call.
@@ -114,10 +134,28 @@ public class RegisteredUserAvroModel extends org.apache.avro.specific.SpecificRe
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: userId = value$ != null ? value$.toString() : null; break;
-    case 1: channelId = value$ != null ? value$.toString() : null; break;
+    case 0: eventId = (java.util.UUID)value$; break;
+    case 1: userId = value$ != null ? value$.toString() : null; break;
+    case 2: channelId = value$ != null ? value$.toString() : null; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
+  }
+
+  /**
+   * Gets the value of the 'eventId' field.
+   * @return The value of the 'eventId' field.
+   */
+  public java.util.UUID getEventId() {
+    return eventId;
+  }
+
+
+  /**
+   * Sets the value of the 'eventId' field.
+   * @param value the value to set.
+   */
+  public void setEventId(java.util.UUID value) {
+    this.eventId = value;
   }
 
   /**
@@ -195,6 +233,7 @@ public class RegisteredUserAvroModel extends org.apache.avro.specific.SpecificRe
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<RegisteredUserAvroModel>
     implements org.apache.avro.data.RecordBuilder<RegisteredUserAvroModel> {
 
+    private java.util.UUID eventId;
     private java.lang.String userId;
     private java.lang.String channelId;
 
@@ -209,13 +248,17 @@ public class RegisteredUserAvroModel extends org.apache.avro.specific.SpecificRe
      */
     private Builder(com.namacmo.infracommon.kafka.model.RegisteredUserAvroModel.Builder other) {
       super(other);
-      if (isValidValue(fields()[0], other.userId)) {
-        this.userId = data().deepCopy(fields()[0].schema(), other.userId);
+      if (isValidValue(fields()[0], other.eventId)) {
+        this.eventId = data().deepCopy(fields()[0].schema(), other.eventId);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
-      if (isValidValue(fields()[1], other.channelId)) {
-        this.channelId = data().deepCopy(fields()[1].schema(), other.channelId);
+      if (isValidValue(fields()[1], other.userId)) {
+        this.userId = data().deepCopy(fields()[1].schema(), other.userId);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
+      }
+      if (isValidValue(fields()[2], other.channelId)) {
+        this.channelId = data().deepCopy(fields()[2].schema(), other.channelId);
+        fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
     }
 
@@ -225,14 +268,58 @@ public class RegisteredUserAvroModel extends org.apache.avro.specific.SpecificRe
      */
     private Builder(com.namacmo.infracommon.kafka.model.RegisteredUserAvroModel other) {
       super(SCHEMA$, MODEL$);
-      if (isValidValue(fields()[0], other.userId)) {
-        this.userId = data().deepCopy(fields()[0].schema(), other.userId);
+      if (isValidValue(fields()[0], other.eventId)) {
+        this.eventId = data().deepCopy(fields()[0].schema(), other.eventId);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.channelId)) {
-        this.channelId = data().deepCopy(fields()[1].schema(), other.channelId);
+      if (isValidValue(fields()[1], other.userId)) {
+        this.userId = data().deepCopy(fields()[1].schema(), other.userId);
         fieldSetFlags()[1] = true;
       }
+      if (isValidValue(fields()[2], other.channelId)) {
+        this.channelId = data().deepCopy(fields()[2].schema(), other.channelId);
+        fieldSetFlags()[2] = true;
+      }
+    }
+
+    /**
+      * Gets the value of the 'eventId' field.
+      * @return The value.
+      */
+    public java.util.UUID getEventId() {
+      return eventId;
+    }
+
+
+    /**
+      * Sets the value of the 'eventId' field.
+      * @param value The value of 'eventId'.
+      * @return This builder.
+      */
+    public com.namacmo.infracommon.kafka.model.RegisteredUserAvroModel.Builder setEventId(java.util.UUID value) {
+      validate(fields()[0], value);
+      this.eventId = value;
+      fieldSetFlags()[0] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'eventId' field has been set.
+      * @return True if the 'eventId' field has been set, false otherwise.
+      */
+    public boolean hasEventId() {
+      return fieldSetFlags()[0];
+    }
+
+
+    /**
+      * Clears the value of the 'eventId' field.
+      * @return This builder.
+      */
+    public com.namacmo.infracommon.kafka.model.RegisteredUserAvroModel.Builder clearEventId() {
+      eventId = null;
+      fieldSetFlags()[0] = false;
+      return this;
     }
 
     /**
@@ -250,9 +337,9 @@ public class RegisteredUserAvroModel extends org.apache.avro.specific.SpecificRe
       * @return This builder.
       */
     public com.namacmo.infracommon.kafka.model.RegisteredUserAvroModel.Builder setUserId(java.lang.String value) {
-      validate(fields()[0], value);
+      validate(fields()[1], value);
       this.userId = value;
-      fieldSetFlags()[0] = true;
+      fieldSetFlags()[1] = true;
       return this;
     }
 
@@ -261,7 +348,7 @@ public class RegisteredUserAvroModel extends org.apache.avro.specific.SpecificRe
       * @return True if the 'userId' field has been set, false otherwise.
       */
     public boolean hasUserId() {
-      return fieldSetFlags()[0];
+      return fieldSetFlags()[1];
     }
 
 
@@ -271,7 +358,7 @@ public class RegisteredUserAvroModel extends org.apache.avro.specific.SpecificRe
       */
     public com.namacmo.infracommon.kafka.model.RegisteredUserAvroModel.Builder clearUserId() {
       userId = null;
-      fieldSetFlags()[0] = false;
+      fieldSetFlags()[1] = false;
       return this;
     }
 
@@ -290,9 +377,9 @@ public class RegisteredUserAvroModel extends org.apache.avro.specific.SpecificRe
       * @return This builder.
       */
     public com.namacmo.infracommon.kafka.model.RegisteredUserAvroModel.Builder setChannelId(java.lang.String value) {
-      validate(fields()[1], value);
+      validate(fields()[2], value);
       this.channelId = value;
-      fieldSetFlags()[1] = true;
+      fieldSetFlags()[2] = true;
       return this;
     }
 
@@ -301,7 +388,7 @@ public class RegisteredUserAvroModel extends org.apache.avro.specific.SpecificRe
       * @return True if the 'channelId' field has been set, false otherwise.
       */
     public boolean hasChannelId() {
-      return fieldSetFlags()[1];
+      return fieldSetFlags()[2];
     }
 
 
@@ -311,7 +398,7 @@ public class RegisteredUserAvroModel extends org.apache.avro.specific.SpecificRe
       */
     public com.namacmo.infracommon.kafka.model.RegisteredUserAvroModel.Builder clearChannelId() {
       channelId = null;
-      fieldSetFlags()[1] = false;
+      fieldSetFlags()[2] = false;
       return this;
     }
 
@@ -320,8 +407,9 @@ public class RegisteredUserAvroModel extends org.apache.avro.specific.SpecificRe
     public RegisteredUserAvroModel build() {
       try {
         RegisteredUserAvroModel record = new RegisteredUserAvroModel();
-        record.userId = fieldSetFlags()[0] ? this.userId : (java.lang.String) defaultValue(fields()[0]);
-        record.channelId = fieldSetFlags()[1] ? this.channelId : (java.lang.String) defaultValue(fields()[1]);
+        record.eventId = fieldSetFlags()[0] ? this.eventId : (java.util.UUID) defaultValue(fields()[0]);
+        record.userId = fieldSetFlags()[1] ? this.userId : (java.lang.String) defaultValue(fields()[1]);
+        record.channelId = fieldSetFlags()[2] ? this.channelId : (java.lang.String) defaultValue(fields()[2]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -349,43 +437,6 @@ public class RegisteredUserAvroModel extends org.apache.avro.specific.SpecificRe
     READER$.read(this, SpecificData.getDecoder(in));
   }
 
-  @Override protected boolean hasCustomCoders() { return true; }
-
-  @Override public void customEncode(org.apache.avro.io.Encoder out)
-    throws java.io.IOException
-  {
-    out.writeString(this.userId);
-
-    out.writeString(this.channelId);
-
-  }
-
-  @Override public void customDecode(org.apache.avro.io.ResolvingDecoder in)
-    throws java.io.IOException
-  {
-    org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
-    if (fieldOrder == null) {
-      this.userId = in.readString();
-
-      this.channelId = in.readString();
-
-    } else {
-      for (int i = 0; i < 2; i++) {
-        switch (fieldOrder[i].pos()) {
-        case 0:
-          this.userId = in.readString();
-          break;
-
-        case 1:
-          this.channelId = in.readString();
-          break;
-
-        default:
-          throw new java.io.IOException("Corrupt ResolvingDecoder.");
-        }
-      }
-    }
-  }
 }
 
 

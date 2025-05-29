@@ -3,26 +3,24 @@ package com.namacmo.user.api.v1.level.adapter.in.web.message;
 import com.namacmo.infracommon.kafka.consumer.KafkaConsumer;
 import com.namacmo.infracommon.kafka.model.RegisteredUserAvroModel;
 import com.namacmo.user.api.v1.level.application.dto.CreateUserLevelCommand;
-import com.namacmo.user.api.v1.level.application.port.in.RegisteredUserRequestMessageListener;
+import com.namacmo.user.api.v1.level.application.port.in.RegisteredUserEventHandler;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.support.KafkaHeaders;
-import org.springframework.messaging.handler.annotation.Header;
-import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class RegisteredUserRequestKafkaListener implements KafkaConsumer<RegisteredUserAvroModel> {
+public class RegisteredUserEventKafkaListener implements KafkaConsumer<RegisteredUserAvroModel> {
 
-  private final RegisteredUserRequestMessageListener registeredUserRequestMessageListener;
+  private final RegisteredUserEventHandler registeredUserEventHandler;
 
   @Override
   @KafkaListener(
@@ -33,21 +31,25 @@ public class RegisteredUserRequestKafkaListener implements KafkaConsumer<Registe
   public void receive(List<ConsumerRecord<String, RegisteredUserAvroModel>> records) {
     log.info("record size={}", records.size());
     for (ConsumerRecord<String, RegisteredUserAvroModel> record : records) {
-      String key = record.key();
-      int partition = record.partition();
-      long offset = record.offset();
-      RegisteredUserAvroModel message = record.value();
+      try {
+        String key = record.key();
+        int partition = record.partition();
+        long offset = record.offset();
+        RegisteredUserAvroModel message = record.value();
 
-      log.info("Received message: key={}, partition={}, offset={}", key, partition, offset);
+        log.info("Received message: key={}, partition={}, offset={}", key, partition, offset);
 
-      registeredUserRequestMessageListener.createUserLevel(
-          new CreateUserLevelCommand(
-              message.getUserId(),
-              message.getChannelId(),
-              LocalDateTime.ofInstant(Instant.ofEpochMilli(record.timestamp()), ZoneId.systemDefault())
-          )
-      );
-
+        registeredUserEventHandler.handleCreateUserLevel(
+            new CreateUserLevelCommand(
+                UUID.randomUUID(),
+                message.getUserId(),
+                message.getChannelId(),
+                LocalDateTime.ofInstant(Instant.ofEpochMilli(record.timestamp()), ZoneId.systemDefault())
+            )
+        );
+      } catch (Exception ignore) {
+        // rollback
+      }
     }
   }
 }
