@@ -2,8 +2,8 @@ package com.namacmo.user.api.v1.level.adapter.in.web.message;
 
 import com.namacmo.infracommon.kafka.consumer.KafkaConsumer;
 import com.namacmo.infracommon.kafka.model.RegisteredUserAvroModel;
-import com.namacmo.user.api.v1.level.application.dto.CreateUserLevelCommand;
-import com.namacmo.user.api.v1.level.application.port.in.RegisteredUserEventHandler;
+import com.namacmo.user.api.v1.level.application.port.in.CreateUserCommandEvent;
+import com.namacmo.user.api.v1.level.application.port.in.CreateUserCommandHandler;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class RegisteredUserEventKafkaListener implements KafkaConsumer<RegisteredUserAvroModel> {
 
-  private final RegisteredUserEventHandler registeredUserEventHandler;
+  private final CreateUserCommandHandler createUserCommandHandler;
 
   @Override
   @KafkaListener(
@@ -39,8 +39,8 @@ public class RegisteredUserEventKafkaListener implements KafkaConsumer<Registere
 
         log.info("Received message: key={}, partition={}, offset={}", key, partition, offset);
 
-        registeredUserEventHandler.handleCreateUserLevel(
-            new CreateUserLevelCommand(
+        createUserCommandHandler.handle(
+            new CreateUserCommandEvent(
                 UUID.randomUUID(),
                 message.getUserId(),
                 message.getChannelId(),

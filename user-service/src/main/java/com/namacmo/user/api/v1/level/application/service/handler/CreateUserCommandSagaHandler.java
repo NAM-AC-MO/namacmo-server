@@ -1,7 +1,7 @@
 package com.namacmo.user.api.v1.level.application.service.handler;
 
-import com.namacmo.user.api.v1.level.application.dto.CreateUserLevelCommand;
-import com.namacmo.user.api.v1.level.application.port.in.RegisteredUserEventHandler;
+import com.namacmo.user.api.v1.level.application.port.in.CreateUserCommandEvent;
+import com.namacmo.user.api.v1.level.application.port.in.CreateUserCommandHandler;
 import com.namacmo.user.api.v1.level.application.port.out.ExistsUserLevelPort;
 import com.namacmo.user.api.v1.level.application.port.out.RegisterUserLevelPort;
 import com.namacmo.user.api.v1.level.application.service.saga.RegisteredUserSaga;
@@ -14,16 +14,18 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class RegisteredUserEventHandlerImpl implements RegisteredUserEventHandler {
+public class CreateUserCommandSagaHandler implements CreateUserCommandHandler {
 
   private final RegisterUserLevelPort registerUserLevelPort;
   private final ExistsUserLevelPort existsUserLevelPort;
   private final RegisteredUserSaga registeredUserSaga;
 
   @Override
-  public void handleCreateUserLevel(CreateUserLevelCommand command) {
-//    existsUserLevelPort.existsUserLevel(command.eventId());
-    final MembershipLevel membershipLevel = MembershipLevelFactory.of(command.userId(), command.createdAt());
+  public void handle(CreateUserCommandEvent commandEvent) {
+    // 메시지 중복체크
+    //    existsUserLevelPort.existsUserLevel(command.eventId());
+    // 로직 ->
+    final MembershipLevel membershipLevel = MembershipLevelFactory.of(commandEvent.userId(), commandEvent.createdAt());
     try {
       registeredUserSaga.process(membershipLevel);
     } catch (Exception e) {

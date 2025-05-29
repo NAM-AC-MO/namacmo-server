@@ -7,7 +7,6 @@ import com.namacmo.user.api.v1.user.domain.valueobject.Roles;
 import com.namacmo.user.api.v1.user.domain.valueobject.UserId;
 import com.namacmo.user.api.v1.user.domain.valueobject.UserProfile;
 import java.util.Set;
-import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 

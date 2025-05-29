@@ -1,6 +1,6 @@
 package com.namacmo.user.api.v1.level.application.service;
 
-import com.namacmo.user.api.v1.level.application.dto.CreateUserLevelCommand;
+import com.namacmo.user.api.v1.level.application.port.in.CreateUserCommandEvent;
 import com.namacmo.user.api.v1.level.application.port.out.RegisterUserLevelPort;
 import com.namacmo.user.api.v1.level.domain.model.MembershipLevel;
 import com.namacmo.user.api.v1.level.domain.model.factory.MembershipLevelFactory;
@@ -15,7 +15,7 @@ public class RegisteredUserService {
 
   private final RegisterUserLevelPort registerUserLevelPort;
 
-  public MembershipLevel createUserLevel(CreateUserLevelCommand command) {
+  public MembershipLevel createUserLevel(CreateUserCommandEvent command) {
     log.info("userId={} channelId={} createAt={}", command.userId(), command.channelId(), command.createdAt());
 
     final MembershipLevel membershipLevel = MembershipLevelFactory.of(command.userId(), command.createdAt());
