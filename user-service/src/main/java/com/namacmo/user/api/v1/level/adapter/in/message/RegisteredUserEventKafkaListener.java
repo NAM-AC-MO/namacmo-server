@@ -1,4 +1,4 @@
-package com.namacmo.user.api.v1.level.adapter.in.web.message;
+package com.namacmo.user.api.v1.level.adapter.in.message;
 
 import com.namacmo.infracommon.kafka.consumer.KafkaConsumer;
 import com.namacmo.infracommon.kafka.model.RegisteredUserAvroModel;

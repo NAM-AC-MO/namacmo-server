@@ -34,6 +34,7 @@ public class RegisterUserService implements RegisterUserUseCase {
 
     final UserJpaEntity userJpaEntity = registerUserPort.registerUser(user);
     domainEventPublisher.publish(user.getDomainEvents());
+    // evert store에 evnet 저장
     user.clearDomainEvents();
 
     return mapper.mapToDomain(userJpaEntity);
