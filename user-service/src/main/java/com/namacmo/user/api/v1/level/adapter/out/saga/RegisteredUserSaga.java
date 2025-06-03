@@ -14,7 +14,7 @@ public class RegisteredUserSaga implements SagaStep<MembershipLevel> {
 
   @Override
   public void process(MembershipLevel data) {
-
+    registerUserLevelPort.createUserLevel(data);
   }
 
   @Override

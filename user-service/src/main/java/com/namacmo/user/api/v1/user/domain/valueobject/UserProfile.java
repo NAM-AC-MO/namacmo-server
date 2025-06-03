@@ -7,10 +7,10 @@ import org.springframework.util.Assert;
 
 @Getter
 public class UserProfile {
-  private Address address;
-  private String email;
-  private String name;
-  private String phone;
+  private final Address address;
+  private final String email;
+  private final String name;
+  private final String phone;
 
   @Builder
   private UserProfile(

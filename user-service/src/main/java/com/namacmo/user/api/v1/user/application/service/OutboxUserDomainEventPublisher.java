@@ -1,4 +1,4 @@
-package com.namacmo.user.api.v1.user.domain.service;
+package com.namacmo.user.api.v1.user.application.service;
 
 import com.namacmo.appcommon.domain.event.DomainEvent;
 import com.namacmo.appcommon.domain.event.publisher.DomainEventPublisher;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class UserDomainEventPublisher implements DomainEventPublisher<User> {
+public class OutboxUserDomainEventPublisher implements DomainEventPublisher<User> {
 
   private final ApplicationEventPublisher eventPublisher;
 

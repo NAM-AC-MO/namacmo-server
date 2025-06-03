@@ -1,6 +1,7 @@
 package com.namacmo.user.api.v1.user.domain.model;
 
 import com.namacmo.appcommon.domain.entity.AggregateRoot;
+import com.namacmo.user.api.v1.common.outbox.valueobject.EventType;
 import com.namacmo.user.api.v1.user.domain.event.UserRegisteredEvent;
 import com.namacmo.user.api.v1.user.domain.valueobject.Role;
 import com.namacmo.user.api.v1.user.domain.valueobject.Roles;
@@ -30,7 +31,14 @@ public class User extends AggregateRoot<User, UserId> {
         .roles(roles)
         .build();
 
-    user.registerEvent(new UserRegisteredEvent(user.getId().getValue()));
+    final UserRegisteredEvent domainEvent = UserRegisteredEvent.builder()
+        .aggregateId(user.getId().getValue())
+        .aggregateType(user.getClass().getTypeName())
+        .eventType(EventType.USER_JOINED)
+        .userProfile(user.getUserProfile())
+        .build();
+
+    user.registerEvent(domainEvent);
     return user;
   }
 

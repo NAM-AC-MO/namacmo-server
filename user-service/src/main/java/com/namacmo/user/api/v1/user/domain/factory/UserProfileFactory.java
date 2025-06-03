@@ -1,4 +1,4 @@
-package com.namacmo.user.api.v1.user.domain.model.factory;
+package com.namacmo.user.api.v1.user.domain.factory;
 
 import com.namacmo.user.api.v1.user.domain.valueobject.Address;
 import com.namacmo.user.api.v1.user.domain.valueobject.UserProfile;
