@@ -10,7 +10,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -34,9 +34,9 @@ public class UserLevelJpaEntity {
   @Convert(converter = MoneyToBigIntegerConvert.class)
   private Money totalSpent;
   @Column(name = "start_date")
-  private LocalDateTime startDate;
+  private LocalDate startDate;
   @Column(name = "end_date")
-  private LocalDateTime endDate;
+  private LocalDate endDate;
 
   @Builder
   private UserLevelJpaEntity(
@@ -44,8 +44,8 @@ public class UserLevelJpaEntity {
       String userId,
       LevelType levelType,
       Money totalSpent,
-      LocalDateTime startDate,
-      LocalDateTime endDate
+      LocalDate startDate,
+      LocalDate endDate
   ) {
     this.userLevelId = userLevelId;
     this.userId = userId;

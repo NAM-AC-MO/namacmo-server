@@ -1,23 +1,26 @@
-package com.namacmo.user.api.v1.common.outbox.factory;
+package com.namacmo.user.api.v1.common.outbox.adapter.out.persistence.factory;
 
-import com.namacmo.user.api.v1.common.outbox.valueobject.EventType;
-import com.namacmo.user.api.v1.common.outbox.valueobject.OutboxType;
+import com.namacmo.user.api.v1.common.outbox.adapter.out.persistence.valueobject.EventType;
+import com.namacmo.user.api.v1.common.outbox.adapter.out.persistence.valueobject.OutboxType;
 import java.time.LocalDateTime;
+import java.util.UUID;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.util.Assert;
 
 @Getter
 public class GatheringEventCriteria {
-  private final String aggregateType;     // 예: "Order"
-  private final String aggregateId;       // 예: "order-123"
-  private final EventType eventType;      // 예: EventType.CREATED
-  private final OutboxType outboxType;    // 예: OutboxType.ORDER
-  private final String payload;           // JSON 직렬화된 실제 내용 (또는 null)
-  private final LocalDateTime createdAt;  // 이벤트 생성 시간
+  private final UUID eventId;
+  private final String aggregateType;
+  private final String aggregateId;
+  private final EventType eventType;
+  private final OutboxType outboxType;
+  private final String payload;
+  private final LocalDateTime createdAt;
 
   @Builder
   private GatheringEventCriteria(
+      UUID eventId,
       String aggregateType,
       String aggregateId,
       EventType eventType,
@@ -25,6 +28,7 @@ public class GatheringEventCriteria {
       String payload,
       LocalDateTime createdAt
   ) {
+    this.eventId = eventId;
     this.aggregateType = aggregateType;
     this.aggregateId = aggregateId;
     this.eventType = eventType;

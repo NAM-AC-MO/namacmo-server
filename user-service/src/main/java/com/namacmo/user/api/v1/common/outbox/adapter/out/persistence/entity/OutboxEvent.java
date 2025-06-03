@@ -1,7 +1,7 @@
-package com.namacmo.user.api.v1.common.outbox.entity;
+package com.namacmo.user.api.v1.common.outbox.adapter.out.persistence.entity;
 
-import com.namacmo.user.api.v1.common.outbox.valueobject.EventType;
-import com.namacmo.user.api.v1.common.outbox.valueobject.OutboxType;
+import com.namacmo.user.api.v1.common.outbox.adapter.out.persistence.valueobject.EventType;
+import com.namacmo.user.api.v1.common.outbox.adapter.out.persistence.valueobject.OutboxType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -15,17 +15,15 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.annotations.UuidGenerator;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OutboxEvent {
   @Id
-  @UuidGenerator
   @JdbcTypeCode(Types.VARCHAR)
   @Column(length = 36, nullable = false, unique = true)
-  private UUID id;
+  private UUID eventId;
   @Column(nullable = false)
   private String aggregateType;
   @Column(nullable = false)
@@ -43,7 +41,7 @@ public class OutboxEvent {
 
   @Builder
   private OutboxEvent(
-      UUID id,
+      UUID eventId,
       String aggregateType,
       String aggregateId,
       EventType eventType,
@@ -51,12 +49,20 @@ public class OutboxEvent {
       String payload,
       LocalDateTime createdAt
   ) {
-    this.id = id;
+    this.eventId = eventId;
     this.aggregateType = aggregateType;
     this.aggregateId = aggregateId;
     this.eventType = eventType;
     this.outboxType = outboxType;
     this.payload = payload;
     this.createdAt = createdAt;
+  }
+
+  public void markOutboxEventSent() {
+    this.outboxType = OutboxType.SENT;
+  }
+
+  public void markOutboxEventFailed() {
+    this.outboxType = OutboxType.FAILED;
   }
 }

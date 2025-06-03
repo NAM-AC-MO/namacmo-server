@@ -5,7 +5,7 @@ import com.namacmo.infracommon.kafka.model.RegisteredUserAvroModel;
 import com.namacmo.user.api.v1.level.application.port.in.CreateUserCommandEvent;
 import com.namacmo.user.api.v1.level.application.port.in.CreateUserCommandHandler;
 import java.time.Instant;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
 import java.util.UUID;
@@ -44,7 +44,7 @@ public class RegisteredUserEventKafkaListener implements KafkaConsumer<Registere
                 UUID.randomUUID(),
                 message.getUserId(),
                 message.getChannelId(),
-                LocalDateTime.ofInstant(Instant.ofEpochMilli(record.timestamp()), ZoneId.systemDefault())
+                LocalDate.ofInstant(Instant.ofEpochMilli(record.timestamp()), ZoneId.systemDefault())
             )
         );
       } catch (Exception ignore) {

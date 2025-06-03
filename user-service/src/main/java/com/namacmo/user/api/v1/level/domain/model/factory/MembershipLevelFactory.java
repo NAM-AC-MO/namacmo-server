@@ -6,7 +6,7 @@ import com.namacmo.user.api.v1.level.domain.valueobject.LevelType;
 import com.namacmo.user.api.v1.level.domain.valueobject.Period;
 import com.namacmo.user.api.v1.level.domain.valueobject.UserId;
 import com.namacmo.user.api.v1.level.domain.valueobject.UserLevelId;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public final class MembershipLevelFactory {
   private MembershipLevelFactory() {
@@ -14,7 +14,7 @@ public final class MembershipLevelFactory {
 
   public static MembershipLevel of(
       String userId,
-      LocalDateTime createdAt
+      LocalDate createdAt
   ) {
     return MembershipLevel.builder()
         .userLevelId(new UserLevelId())

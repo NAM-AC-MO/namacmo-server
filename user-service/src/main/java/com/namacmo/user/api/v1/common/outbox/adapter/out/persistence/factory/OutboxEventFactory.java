@@ -1,6 +1,6 @@
-package com.namacmo.user.api.v1.common.outbox.factory;
+package com.namacmo.user.api.v1.common.outbox.adapter.out.persistence.factory;
 
-import com.namacmo.user.api.v1.common.outbox.entity.OutboxEvent;
+import com.namacmo.user.api.v1.common.outbox.adapter.out.persistence.entity.OutboxEvent;
 
 public final class OutboxEventFactory {
   private OutboxEventFactory() {
@@ -9,6 +9,7 @@ public final class OutboxEventFactory {
 
   public static OutboxEvent create(GatheringEventCriteria criteria) {
     return OutboxEvent.builder()
+        .eventId(criteria.getEventId())
         .aggregateType(criteria.getAggregateType())
         .aggregateId(criteria.getAggregateId())
         .eventType(criteria.getEventType())

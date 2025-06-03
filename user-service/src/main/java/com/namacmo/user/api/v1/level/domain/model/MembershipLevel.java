@@ -6,7 +6,7 @@ import com.namacmo.user.api.v1.level.domain.valueobject.LevelType;
 import com.namacmo.user.api.v1.level.domain.valueobject.Period;
 import com.namacmo.user.api.v1.level.domain.valueobject.UserId;
 import com.namacmo.user.api.v1.level.domain.valueobject.UserLevelId;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import lombok.Builder;
 
 public class MembershipLevel extends AggregateRoot<MembershipLevel, UserLevelId> {
@@ -42,11 +42,11 @@ public class MembershipLevel extends AggregateRoot<MembershipLevel, UserLevelId>
     return totalSpent;
   }
 
-  public LocalDateTime getStartDate() {
+  public LocalDate getStartDate() {
     return membershipPeriod.startDate();
   }
 
-  public LocalDateTime getEndDate() {
+  public LocalDate getEndDate() {
     return membershipPeriod.endDate();
   }
 }

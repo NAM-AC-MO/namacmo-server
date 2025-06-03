@@ -1,13 +1,14 @@
 package com.namacmo.user.api.v1.user.domain.model;
 
 import com.namacmo.appcommon.domain.entity.AggregateRoot;
-import com.namacmo.user.api.v1.common.outbox.valueobject.EventType;
+import com.namacmo.user.api.v1.common.outbox.adapter.out.persistence.valueobject.EventType;
 import com.namacmo.user.api.v1.user.domain.event.UserRegisteredEvent;
 import com.namacmo.user.api.v1.user.domain.valueobject.Role;
 import com.namacmo.user.api.v1.user.domain.valueobject.Roles;
 import com.namacmo.user.api.v1.user.domain.valueobject.UserId;
 import com.namacmo.user.api.v1.user.domain.valueobject.UserProfile;
 import java.util.Set;
+import java.util.UUID;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -32,6 +33,7 @@ public class User extends AggregateRoot<User, UserId> {
         .build();
 
     final UserRegisteredEvent domainEvent = UserRegisteredEvent.builder()
+        .eventId(UUID.randomUUID())
         .aggregateId(user.getId().getValue())
         .aggregateType(user.getClass().getTypeName())
         .eventType(EventType.USER_JOINED)

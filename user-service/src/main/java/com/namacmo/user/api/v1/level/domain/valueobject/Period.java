@@ -1,10 +1,10 @@
 package com.namacmo.user.api.v1.level.domain.valueobject;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public record Period(
-    LocalDateTime startDate,
-    LocalDateTime endDate
+    LocalDate startDate,
+    LocalDate endDate
 ) {
   private static final long STANDARD_MONTHS = 6L;
 
@@ -17,25 +17,24 @@ public record Period(
     }
   }
 
-  public Period(LocalDateTime now) {
+  public Period(LocalDate now) {
     this(
-        now.withDayOfMonth(1).withHour(0).withMinute(0).withSecond(0).withNano(0),
+        now.withDayOfMonth(1),
         now.plusMonths(STANDARD_MONTHS)
             .withDayOfMonth(1)
             .minusDays(1)
-            .withHour(23).withMinute(59)
     );
   }
 
-  public boolean isWithin(LocalDateTime target) {
+  public boolean isWithin(LocalDate target) {
     return target != null && !target.isBefore(startDate) && !target.isAfter(endDate);
   }
 
-  public boolean isExpired(LocalDateTime now) {
+  public boolean isExpired(LocalDate now) {
     return endDate.isBefore(now);
   }
 
-  public boolean isActive(LocalDateTime now) {
+  public boolean isActive(LocalDate now) {
     return isWithin(now);
   }
 }
