@@ -8,7 +8,6 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -41,7 +40,7 @@ public class RegisteredUserEventKafkaListener implements KafkaConsumer<Registere
 
         createUserCommandHandler.handle(
             new CreateUserCommandEvent(
-                UUID.randomUUID(),
+                message.getEventId(),
                 message.getUserId(),
                 message.getChannelId(),
                 LocalDate.ofInstant(Instant.ofEpochMilli(record.timestamp()), ZoneId.systemDefault())

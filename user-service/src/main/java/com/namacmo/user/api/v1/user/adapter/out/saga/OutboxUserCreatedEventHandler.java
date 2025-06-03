@@ -58,12 +58,16 @@ public class OutboxUserCreatedEventHandler {
   @Transactional(propagation = Propagation.REQUIRES_NEW)
   @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
   public void sendMessage(UserRegisteredEvent event) {
-    log.info("[send message] domain event for {}: {}", event.getAggregateId(), event.getAggregateId());
+    log.info("[send message] domain event for {}: {}", event.getAggregateType(), event.getAggregateId());
     final LocalDateTime now = LocalDateTime.now();
 
     try {
       updateOutboxEventStatusPort.markOutboxEventSent(event.getEventId());
-      final UserRegisteredMessage userRegisteredMessage = new UserRegisteredMessage(event.getAggregateId(), now);
+      final UserRegisteredMessage userRegisteredMessage = new UserRegisteredMessage(
+          event.getEventId(),
+          event.getAggregateId(),
+          now
+      );
       publisher.publish(userRegisteredMessage);
     } catch (Exception e) {
       updateOutboxEventStatusPort.markOutboxEventFailed(event.getEventId());

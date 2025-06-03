@@ -1,4 +1,4 @@
-package com.namacmo.user.api.v1.common.outbox.adapter.out.persistence;
+package com.namacmo.user.api.v1.common.outbox.adapter.out;
 
 import com.namacmo.appcommon.hexagonal.PersistenceAdapter;
 import com.namacmo.user.api.v1.common.outbox.adapter.out.persistence.entity.OutboxEvent;
@@ -8,8 +8,10 @@ import com.namacmo.user.api.v1.common.outbox.application.port.out.UpdateOutboxEv
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
+@Transactional
 @PersistenceAdapter
 @RequiredArgsConstructor
 public class OutboxEventAdapter implements UpdateOutboxEventStatusPort {

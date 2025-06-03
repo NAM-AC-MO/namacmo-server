@@ -9,6 +9,6 @@ public record CreateUserCommandEvent(
     UUID eventId,
     String userId,
     String channelId,
-    LocalDate createdAt
+    LocalDate eventCreatedDate
 ) implements MembershipCommandEvent {
 }
