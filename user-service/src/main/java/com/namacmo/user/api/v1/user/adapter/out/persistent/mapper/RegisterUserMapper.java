@@ -1,7 +1,7 @@
-package com.namacmo.user.api.v1.user.adapter.out.persistence.mapper;
+package com.namacmo.user.api.v1.user.adapter.out.persistent.mapper;
 
-import com.namacmo.user.api.v1.user.adapter.out.persistence.valueobject.AddressJpaVo;
-import com.namacmo.user.api.v1.user.adapter.out.persistence.entity.UserJpaEntity;
+import com.namacmo.user.api.v1.user.adapter.out.persistent.valueobject.AddressJpaVo;
+import com.namacmo.user.api.v1.user.adapter.out.persistent.entity.UserJpaEntity;
 import com.namacmo.user.api.v1.user.domain.valueobject.Address;
 import com.namacmo.user.api.v1.user.domain.valueobject.Roles;
 import com.namacmo.user.api.v1.user.domain.model.User;

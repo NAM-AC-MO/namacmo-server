@@ -1,6 +1,6 @@
-package com.namacmo.user.api.v1.user.adapter.out.persistence.entity;
+package com.namacmo.user.api.v1.user.adapter.out.persistent.entity;
 
-import com.namacmo.user.api.v1.user.adapter.out.persistence.valueobject.AddressJpaVo;
+import com.namacmo.user.api.v1.user.adapter.out.persistent.valueobject.AddressJpaVo;
 import com.namacmo.user.api.v1.user.domain.valueobject.Role;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
@@ -10,8 +10,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;

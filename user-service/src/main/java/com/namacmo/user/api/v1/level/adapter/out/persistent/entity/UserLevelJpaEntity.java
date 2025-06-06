@@ -1,7 +1,7 @@
-package com.namacmo.user.api.v1.level.adapter.out.persistence.entity;
+package com.namacmo.user.api.v1.level.adapter.out.persistent.entity;
 
 import com.namacmo.user.api.v1.common.Money;
-import com.namacmo.user.api.v1.level.adapter.out.persistence.MoneyToBigIntegerConvert;
+import com.namacmo.user.api.v1.level.adapter.out.persistent.MoneyToBigIntegerConvert;
 import com.namacmo.user.api.v1.level.domain.valueobject.LevelType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;

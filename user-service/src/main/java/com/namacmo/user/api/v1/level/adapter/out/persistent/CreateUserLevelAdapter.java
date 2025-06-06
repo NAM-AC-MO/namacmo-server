@@ -1,9 +1,9 @@
-package com.namacmo.user.api.v1.level.adapter.out.persistence;
+package com.namacmo.user.api.v1.level.adapter.out.persistent;
 
 import com.namacmo.appcommon.hexagonal.PersistenceAdapter;
-import com.namacmo.user.api.v1.level.adapter.out.persistence.entity.UserLevelJpaEntity;
-import com.namacmo.user.api.v1.level.adapter.out.persistence.mapper.CreateUserLevelMapper;
-import com.namacmo.user.api.v1.level.adapter.out.persistence.repository.UserLevelJpaRepository;
+import com.namacmo.user.api.v1.level.adapter.out.persistent.entity.UserLevelJpaEntity;
+import com.namacmo.user.api.v1.level.adapter.out.persistent.mapper.CreateUserLevelMapper;
+import com.namacmo.user.api.v1.level.adapter.out.persistent.repository.UserLevelJpaRepository;
 import com.namacmo.user.api.v1.level.application.port.out.RegisterUserLevelPort;
 import com.namacmo.user.api.v1.level.domain.model.MembershipLevel;
 import lombok.RequiredArgsConstructor;

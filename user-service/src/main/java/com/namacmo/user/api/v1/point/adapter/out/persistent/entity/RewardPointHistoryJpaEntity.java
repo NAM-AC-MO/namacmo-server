@@ -1,4 +1,4 @@
-package com.namacmo.user.api.v1.point.adapter.out.persistence.entity;
+package com.namacmo.user.api.v1.point.adapter.out.persistent.entity;
 
 import com.namacmo.user.api.v1.point.domain.valueobject.PointType;
 import jakarta.persistence.Column;

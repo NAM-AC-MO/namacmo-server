@@ -1,8 +1,8 @@
 package com.namacmo.user.api.v1.user.application.service;
 
 import com.namacmo.appcommon.hexagonal.UseCase;
-import com.namacmo.user.api.v1.user.adapter.out.persistence.entity.UserJpaEntity;
-import com.namacmo.user.api.v1.user.adapter.out.persistence.mapper.RegisterUserMapper;
+import com.namacmo.user.api.v1.user.adapter.out.persistent.entity.UserJpaEntity;
+import com.namacmo.user.api.v1.user.adapter.out.persistent.mapper.RegisterUserMapper;
 import com.namacmo.user.api.v1.user.application.port.in.RegisterUserCommand;
 import com.namacmo.user.api.v1.user.application.port.in.RegisterUserUseCase;
 import com.namacmo.user.api.v1.user.application.port.out.RegisterUserPort;

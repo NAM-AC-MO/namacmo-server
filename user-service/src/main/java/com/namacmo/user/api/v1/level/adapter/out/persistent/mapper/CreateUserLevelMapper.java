@@ -1,6 +1,6 @@
-package com.namacmo.user.api.v1.level.adapter.out.persistence.mapper;
+package com.namacmo.user.api.v1.level.adapter.out.persistent.mapper;
 
-import com.namacmo.user.api.v1.level.adapter.out.persistence.entity.UserLevelJpaEntity;
+import com.namacmo.user.api.v1.level.adapter.out.persistent.entity.UserLevelJpaEntity;
 import com.namacmo.user.api.v1.level.domain.model.MembershipLevel;
 import org.springframework.stereotype.Component;
 

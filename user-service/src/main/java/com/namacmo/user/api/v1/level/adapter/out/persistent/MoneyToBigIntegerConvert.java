@@ -1,4 +1,4 @@
-package com.namacmo.user.api.v1.level.adapter.out.persistence;
+package com.namacmo.user.api.v1.level.adapter.out.persistent;
 
 import com.namacmo.user.api.v1.common.Money;
 import jakarta.persistence.AttributeConverter;

@@ -1,6 +1,6 @@
-package com.namacmo.user.api.v1.user.adapter.out.persistence.repository;
+package com.namacmo.user.api.v1.user.adapter.out.persistent.repository;
 
-import com.namacmo.user.api.v1.user.adapter.out.persistence.entity.UserJpaEntity;
+import com.namacmo.user.api.v1.user.adapter.out.persistent.entity.UserJpaEntity;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 

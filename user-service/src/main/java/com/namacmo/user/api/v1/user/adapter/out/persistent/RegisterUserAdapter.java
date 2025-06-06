@@ -1,9 +1,9 @@
-package com.namacmo.user.api.v1.user.adapter.out.persistence;
+package com.namacmo.user.api.v1.user.adapter.out.persistent;
 
 import com.namacmo.appcommon.hexagonal.PersistenceAdapter;
-import com.namacmo.user.api.v1.user.adapter.out.persistence.entity.UserJpaEntity;
-import com.namacmo.user.api.v1.user.adapter.out.persistence.mapper.RegisterUserMapper;
-import com.namacmo.user.api.v1.user.adapter.out.persistence.repository.UserJpaRepository;
+import com.namacmo.user.api.v1.user.adapter.out.persistent.entity.UserJpaEntity;
+import com.namacmo.user.api.v1.user.adapter.out.persistent.mapper.RegisterUserMapper;
+import com.namacmo.user.api.v1.user.adapter.out.persistent.repository.UserJpaRepository;
 import com.namacmo.user.api.v1.user.application.exception.UserAlreadyExistsException;
 import com.namacmo.user.api.v1.user.application.port.out.RegisterUserPort;
 import com.namacmo.user.api.v1.user.domain.model.User;
