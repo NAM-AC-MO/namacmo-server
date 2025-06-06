@@ -1,4 +1,4 @@
-package com.namacmo.paymentservice.v1.domain
+package com.namacmo.paymentservice.v1.domain.valueobject
 
 enum class PSPConfirmationStatus (description: String) {
   DONE("완료"),

@@ -1,6 +1,6 @@
 package com.namacmo.paymentservice.v1.domain.entity
 
-import com.namacmo.paymentservice.v1.domain.valueobject.Money
+import com.namacmo.appcommon.domain.valueobject.Money
 
 data class Product (
   val id: String,

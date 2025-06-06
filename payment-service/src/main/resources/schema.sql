@@ -1,12 +1,12 @@
 CREATE TABLE payment_events (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    buyer_id BIGINT NOT NULL,
+    id VARCHAR(255) PRIMARY KEY,
+    buyer_id VARCHAR(255) NOT NULL,
     is_payment_done BOOLEAN NOT NULL DEFAULT FALSE,
     payment_key VARCHAR(255) UNIQUE,
     order_id VARCHAR(255) UNIQUE,
-    type ENUM('NORMAL') NOT NULL,
+    type ENUM('TOSS', 'KAKAO_PAY', 'KB_CARD', 'SINHAN_CARD', 'PAYCO', 'KB_PAY', 'NAVER_PAY') NOT NULL,
     order_name VARCHAR(255) NOT NULL,
-    method ENUM('EASY_PAY'),
+    method ENUM('EASY_PAY', 'CARD', 'OTHER'),
     psp_raw_data JSON,
     approved_at DATETIME,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -14,10 +14,10 @@ CREATE TABLE payment_events (
 );
 
 CREATE TABLE payment_orders (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    payment_event_id BIGINT NOT NULL,
-    seller_id BIGINT NOT NULL,
-    product_id BIGINT NOT NULL,
+    id VARCHAR(255) PRIMARY KEY,
+    payment_event_id VARCHAR(255) NOT NULL,
+    seller_id VARCHAR(255) NOT NULL,
+    product_id VARCHAR(255) NOT NULL,
     order_id VARCHAR(255) NOT NULL,
     amount DECIMAL(12, 2) NOT NULL,
     payment_order_status ENUM('NOT_STARTED', 'EXECUTING', 'SUCCESS', 'FAILURE', 'UNKNOWN') NOT NULL DEFAULT 'NOT_STARTED',
@@ -32,8 +32,8 @@ CREATE TABLE payment_orders (
 );
 
 CREATE TABLE payment_order_histories (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    payment_order_id BIGINT NOT NULL,
+    id VARCHAR(255) PRIMARY KEY,
+    payment_order_id VARCHAR(255) NOT NULL,
     previous_status ENUM('NOT_STARTED', 'EXECUTING', 'SUCCESS', 'FAILURE', 'UNKNOWN'),
     new_status ENUM('NOT_STARTED', 'EXECUTING', 'SUCCESS', 'FAILURE', 'UNKNOWN'),
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,

@@ -1,0 +1,55 @@
+package com.namacmo.paymentservice.v1.adapter.out.persistent.repository
+
+import com.namacmo.paymentservice.v1.domain.entity.PaymentEvent
+import org.springframework.r2dbc.core.DatabaseClient
+import org.springframework.stereotype.Repository
+import org.springframework.transaction.reactive.TransactionalOperator
+import reactor.core.publisher.Mono
+
+@Repository
+class R2DBCPaymentRepository(
+    private val databaseClient: DatabaseClient,
+    private val transactionalOperator: TransactionalOperator
+) : PaymentRepository {
+
+    override fun save(paymentEvent: PaymentEvent): Mono<Void> {
+        return insertPaymentEvent(paymentEvent)
+            .flatMap { bulkInsertPaymentOrders(paymentEvent) }
+            .`as`(transactionalOperator::transactional)
+            .then()
+    }
+
+    private fun insertPaymentEvent(paymentEvent: PaymentEvent): Mono<Long> {
+        return databaseClient.sql(INSERT_PAYMENT_EVENT_QUERY)
+            .bind("id", paymentEvent.id)
+            .bind("buyerId", paymentEvent.buyerId)
+            .bind("orderName", paymentEvent.orderName)
+            .bind("orderId", paymentEvent.orderId)
+            .fetch()
+            .rowsUpdated()
+    }
+
+    private fun bulkInsertPaymentOrders(paymentEvent: PaymentEvent): Mono<Long> {
+        val paymentOrders = paymentEvent.getPaymentOrders()
+        val valueClauses = paymentOrders.joinToString(", ") { paymentOrder ->
+            "('${paymentOrder.id}', '${paymentEvent.id}', '${paymentOrder.sellerId}', '${paymentOrder.orderId}', '${paymentOrder.productId}', ${paymentOrder.amount.value}, '${paymentOrder.paymentStatus}')"
+        }
+
+        return databaseClient.sql(BULK_INSERT_PAYMENT_ORDER_QUERY(valueClauses))
+            .fetch()
+            .rowsUpdated()
+    }
+
+    companion object {
+        val INSERT_PAYMENT_EVENT_QUERY = """
+          INSERT INTO payment_events (id, buyer_id, order_name, order_id)
+          VALUES (:id, :buyerId, :orderName, :orderId) 
+        """.trimIndent()
+
+        val BULK_INSERT_PAYMENT_ORDER_QUERY = fun (valueClauses: String) = """
+          INSERT INTO payment_orders (id, payment_event_id, seller_id, order_id, product_id, amount, payment_order_status) 
+          VALUES $valueClauses
+        """.trimIndent()
+    }
+
+}

@@ -1,24 +1,24 @@
-package com.namacmo.paymentservice.v1.domain.valueobject;
+package com.namacmo.appcommon.domain.valueobject;
 
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.util.Objects;
 import lombok.Getter;
 
 @Getter
 public final class Money {
 
-  public static final Money ZERO = new Money(BigInteger.ZERO);
-  // TODO: 현재는 only won 이라서 BigInteger 나중에는 BigDecimal 고민해보기
-  private final BigInteger moneyAmount;
+  public static final Money ZERO = new Money(BigDecimal.ZERO);
+
+  private final BigDecimal moneyAmount;
 
   public Money(String moneyAmount) {
     this.moneyAmount = validateMoneyAmount(moneyAmount);
   }
 
-  private BigInteger validateMoneyAmount(String moneyAmount) {
+  private BigDecimal validateMoneyAmount(String moneyAmount) {
     try {
-      final BigInteger checkMoneyAmount = new BigInteger(moneyAmount);
-      if (checkMoneyAmount.compareTo(BigInteger.ZERO) < 0) {
+      final BigDecimal checkMoneyAmount = new BigDecimal(moneyAmount);
+      if (checkMoneyAmount.compareTo(BigDecimal.ZERO) < 0) {
         throw new IllegalArgumentException("금액은 0 이상이어야 합니다.");
       }
       return checkMoneyAmount;
@@ -27,7 +27,13 @@ public final class Money {
     }
   }
 
-  public Money(BigInteger moneyAmount) {
+  public Money(BigDecimal moneyAmount) {
+    if (moneyAmount == null) {
+      throw new IllegalArgumentException("moneyAmount는 null일 수 없습니다.");
+    }
+    if (moneyAmount.compareTo(BigDecimal.ZERO) < 0) {
+      throw new IllegalArgumentException("금액은 0 이상이어야 합니다.");
+    }
     this.moneyAmount = moneyAmount;
   }
 
@@ -40,11 +46,11 @@ public final class Money {
   }
 
   public Money multiply(int factor) {
-    return new Money(this.moneyAmount.multiply(BigInteger.valueOf(factor)));
+    return new Money(this.moneyAmount.multiply(BigDecimal.valueOf(factor)));
   }
 
   public Money divide(int divisor) {
-    return new Money(this.moneyAmount.divide(BigInteger.valueOf(divisor)));
+    return new Money(this.moneyAmount.divide(BigDecimal.valueOf(divisor)));
   }
 
   public boolean isGreaterThan(Money other) {
@@ -61,6 +67,17 @@ public final class Money {
 
   public String toStringValue() {
     return this.moneyAmount.toString();
+  }
+
+  public BigDecimal getValue() {
+    return this.moneyAmount;
+  }
+
+  @Override
+  public String toString() {
+    return "Money{" +
+        "moneyAmount=" + moneyAmount +
+        '}';
   }
 
   @Override

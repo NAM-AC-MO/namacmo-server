@@ -1,5 +1,6 @@
 package com.namacmo.paymentservice.v1.domain
 
+import com.namacmo.paymentservice.v1.domain.valueobject.*
 import java.time.LocalDateTime
 
 data class PaymentExecutionResult (
@@ -30,7 +31,7 @@ data class PaymentExecutionResult (
 
 data class PaymentExtraDetails (
   val type: PaymentType,
-  val method: PaymentMethod,
+  val methodGroup: PaymentMethodGroup,
   val approvedAt: LocalDateTime,
   val orderName: String,
   val pspConfirmationStatus: PSPConfirmationStatus,

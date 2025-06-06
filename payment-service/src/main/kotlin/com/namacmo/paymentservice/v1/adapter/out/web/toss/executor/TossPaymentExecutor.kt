@@ -6,6 +6,9 @@ import com.namacmo.paymentservice.v1.adapter.out.web.toss.response.TossFailureRe
 import com.namacmo.paymentservice.v1.adapter.out.web.toss.response.TossPaymentConfirmationResponse
 import com.namacmo.paymentservice.v1.application.port.`in`.PaymentConfirmCommand
 import com.namacmo.paymentservice.v1.domain.*
+import com.namacmo.paymentservice.v1.domain.valueobject.PSPConfirmationStatus
+import com.namacmo.paymentservice.v1.domain.valueobject.PaymentMethodGroup
+import com.namacmo.paymentservice.v1.domain.valueobject.PaymentType
 import io.netty.handler.timeout.TimeoutException
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatusCode
@@ -57,8 +60,8 @@ class TossPaymentExecutor (
           paymentKey = command.paymentKey,
           orderId = command.orderId,
           extraDetails = PaymentExtraDetails(
-            type = PaymentType.get(it.type),
-            method = PaymentMethod.get(it.method),
+            type = PaymentType.findByName(it.type),
+            methodGroup = PaymentMethodGroup.findByMethod(it.method),
             approvedAt = LocalDateTime.parse(it.approvedAt, DateTimeFormatter.ISO_OFFSET_DATE_TIME),
             pspRawData = it.toString(),
             orderName = it.orderName,

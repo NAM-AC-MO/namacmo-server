@@ -1,6 +1,6 @@
 package com.namacmo.paymentservice.v1.adapter.out.web.toss.exception
 
-import com.namacmo.paymentservice.v1.domain.PaymentStatus
+import com.namacmo.paymentservice.v1.domain.valueobject.PaymentStatus
 
 class PSPConfirmationException (
   val errorCode: String,
