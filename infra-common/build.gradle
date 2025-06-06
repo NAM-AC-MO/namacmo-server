@@ -26,7 +26,9 @@ dependencies {
     api("org.apache.avro:avro:1.11.4")
     api("io.confluent:kafka-avro-serializer:7.6.4")
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation("org.springframework:spring-context")
+    implementation("org.springframework.boot:spring-boot-starter")
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
@@ -55,4 +57,4 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
-tasks.register("prepareKotlinBuildScriptModel"){}
+tasks.register("prepareKotlinBuildScriptModel") {}

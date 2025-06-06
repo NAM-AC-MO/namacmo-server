@@ -1,4 +1,4 @@
-package com.payment.paymentservice
+package com.namacmo.paymentservice
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
