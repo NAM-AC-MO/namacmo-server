@@ -31,7 +31,7 @@ class CheckoutController(
             .map {
                 model.addAttribute("orderId", it.orderId)
                 model.addAttribute("orderName", it.orderName)
-                model.addAttribute("amount", it.amount)
+                model.addAttribute("amount", it.amount.toStringValue())
                 "checkout"
             }
     }

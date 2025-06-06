@@ -5,6 +5,7 @@ import com.namacmo.paymentservice.test.PaymentTestConfiguration
 import com.namacmo.paymentservice.v1.application.port.`in`.CheckoutCommand
 import com.namacmo.paymentservice.v1.application.port.`in`.CheckoutUseCase
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -23,7 +24,7 @@ class CheckoutServiceTest (
     @Autowired private val paymentDatabaseHelper: PaymentDatabaseHelper
 ) {
 
-    @BeforeEach
+    @AfterEach
     fun setup() {
         paymentDatabaseHelper.clean().block()
     }
