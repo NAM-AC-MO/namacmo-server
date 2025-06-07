@@ -3,7 +3,7 @@ package com.namacmo.paymentservice.test
 import com.namacmo.appcommon.domain.valueobject.Money
 import com.namacmo.paymentservice.v1.domain.entity.PaymentEvent
 import com.namacmo.paymentservice.v1.domain.entity.PaymentOrder
-import com.namacmo.paymentservice.v1.domain.entity.PaymentOrders
+import com.namacmo.paymentservice.v1.domain.valueobject.PaymentOrders
 import com.namacmo.paymentservice.v1.domain.valueobject.PaymentMethodGroup
 import com.namacmo.paymentservice.v1.domain.valueobject.PaymentStatus
 import com.namacmo.paymentservice.v1.domain.valueobject.PaymentType
@@ -13,7 +13,6 @@ import reactor.core.publisher.Mono
 import reactor.kotlin.core.publisher.toMono
 import java.math.BigDecimal
 import java.time.LocalDateTime
-import java.time.ZonedDateTime
 
 class R2DBCPaymentDatabaseHelper (
   private val databaseClient: DatabaseClient,

@@ -8,7 +8,7 @@ import com.namacmo.paymentservice.v1.application.port.out.SavePaymentPort
 import com.namacmo.paymentservice.v1.domain.CheckoutResult
 import com.namacmo.paymentservice.v1.domain.entity.PaymentEvent
 import com.namacmo.paymentservice.v1.domain.entity.PaymentOrder
-import com.namacmo.paymentservice.v1.domain.entity.PaymentOrders
+import com.namacmo.paymentservice.v1.domain.valueobject.PaymentOrders
 import com.namacmo.paymentservice.v1.domain.entity.Product
 import com.namacmo.paymentservice.v1.domain.valueobject.PaymentStatus
 import reactor.core.publisher.Mono

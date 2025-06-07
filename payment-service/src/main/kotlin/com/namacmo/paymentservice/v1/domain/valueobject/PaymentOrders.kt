@@ -1,7 +1,7 @@
-package com.namacmo.paymentservice.v1.domain.entity
+package com.namacmo.paymentservice.v1.domain.valueobject
 
 import com.namacmo.appcommon.domain.valueobject.Money
-import com.namacmo.paymentservice.v1.domain.valueobject.PaymentStatus
+import com.namacmo.paymentservice.v1.domain.entity.PaymentOrder
 
 class PaymentOrders(
     private val paymentOrders: List<PaymentOrder>

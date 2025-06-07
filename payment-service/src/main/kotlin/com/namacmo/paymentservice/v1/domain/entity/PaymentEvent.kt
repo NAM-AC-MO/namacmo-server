@@ -2,6 +2,7 @@ package com.namacmo.paymentservice.v1.domain.entity
 
 import com.namacmo.appcommon.domain.valueobject.Money
 import com.namacmo.paymentservice.v1.domain.valueobject.PaymentMethodGroup
+import com.namacmo.paymentservice.v1.domain.valueobject.PaymentOrders
 import com.namacmo.paymentservice.v1.domain.valueobject.PaymentType
 import java.time.LocalDateTime
 
