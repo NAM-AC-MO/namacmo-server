@@ -75,6 +75,7 @@ enum class TossPaymentError(val statusCode: Int, val description: String) {
     }
 
     fun isRetryableError(): Boolean {
+        // TODO: 조금 더 Unknown 이랑 구분하는 것도 좋아보인다.
         return isUnknown()
     }
 

@@ -13,7 +13,7 @@ import java.util.Base64
 @TestConfiguration
 class PSPTestWebClientConfiguration (
   @Value("\${PSP.toss.url}") private val baseUrl: String,
-  @Value("\${PSP.toss.secretKey}") private val secretKey: String
+  @Value("\${PSP.toss.secret-key}") private val secretKey: String
 ) {
 
   fun createTestTossWebClient(vararg customHeaderKeyValue: Pair<String, String>): WebClient {
