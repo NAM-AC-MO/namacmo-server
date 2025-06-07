@@ -1,9 +1,10 @@
-package com.namacmo.paymentservice.v1.adapter.out.web.toss.executor
+package com.namacmo.paymentservice.v1.application.port.out
 
 import com.namacmo.paymentservice.v1.application.port.`in`.PaymentConfirmCommand
 import com.namacmo.paymentservice.v1.domain.PaymentExecutionResult
 import reactor.core.publisher.Mono
 
-interface PaymentExecutor {
+interface PaymentExecutorPort {
+
   fun execute(command: PaymentConfirmCommand): Mono<PaymentExecutionResult>
 }

@@ -66,7 +66,7 @@ class TossPaymentExecutor (
             pspRawData = it.toString(),
             orderName = it.orderName,
             pspConfirmationStatus = PSPConfirmationStatus.get(it.status),
-            totalAmount = it.totalAmount.toLong()
+            totalAmount = it.totalAmount.toString()
           ),
           isSuccess = true,
           isFailure = false,

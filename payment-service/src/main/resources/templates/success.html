@@ -34,7 +34,7 @@
             amount: urlParams.get("amount"),
         };
 
-        const response = await fetch("/v1/toss/confirm", {
+        const response = await fetch("/api/v1/toss/confirm", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -47,7 +47,7 @@
         if (!response.ok) {
             // TODO: 결제 실패 비즈니스 로직을 구현하세요.
             console.log(json);
-            window.location.href = `/fail?message=${json.message}&code=${json.code}`;
+            window.location.href = `/view/v1/toss/fail?message=${json.message}&code=${json.code}`;
         }
 
         // TODO: 결제 성공 비즈니스 로직을 구현하세요.

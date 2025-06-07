@@ -35,6 +35,6 @@ data class PaymentExtraDetails (
   val approvedAt: LocalDateTime,
   val orderName: String,
   val pspConfirmationStatus: PSPConfirmationStatus,
-  val totalAmount: Long,
+  val totalAmount: String,
   val pspRawData: String
 )

@@ -25,7 +25,7 @@ class CheckoutServiceTest (
 ) {
 
     @AfterEach
-    fun setup() {
+    fun tearDown() {
         paymentDatabaseHelper.clean().block()
     }
 
