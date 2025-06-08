@@ -70,6 +70,22 @@ services:
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_INTERNAL://kafka-broker-1:29092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
+  kafka-ui:
+    image: provectuslabs/kafka-ui
+    container_name: kafka-ui
+    networks:
+      - namacmo_service_network
+    ports:
+      - "8989:8080"
+    restart: always
+    depends_on:
+      - kafka-broker-1
+      - zookeeper
+    environment:
+      - KAFKA_CLUSTERS_0_NAME=local
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka-broker-1:29092   # ✅ 여기 수정됨
+      - KAFKA_CLUSTERS_0_ZOOKEEPER=zookeeper:2181
+
   schema-registry:
     image: confluentinc/cp-schema-registry:latest
     container_name: schema-registry

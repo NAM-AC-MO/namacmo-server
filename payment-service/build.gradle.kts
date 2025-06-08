@@ -31,6 +31,9 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
     implementation("com.mysql:mysql-connector-j")
     implementation("io.asyncer:r2dbc-mysql")
+    implementation("io.github.oshai:kotlin-logging-jvm:7.0.3")
+    implementation("io.projectreactor.kafka:reactor-kafka:1.3.23")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
@@ -48,5 +51,6 @@ kotlin {
 tasks.withType<Test> {
     useJUnitPlatform{
         excludeTags ("TooLongTime")
+//        excludeTags("ExternalIntegration")
     }
 }
