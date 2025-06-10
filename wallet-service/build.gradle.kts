@@ -3,7 +3,7 @@ plugins {
     kotlin("plugin.spring") version "1.9.25"
 }
 
-group = "com.namacmo.payment"
+group = "com.namacmo.wallet"
 version = "0.0.1-SNAPSHOT"
 
 java {
@@ -22,24 +22,16 @@ repositories {
 dependencies {
     implementation(project(":app-common"))
     api(project(":infra-common"))
-    implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
-    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
     implementation("com.mysql:mysql-connector-j")
-    implementation("io.asyncer:r2dbc-mysql")
-    implementation("io.github.oshai:kotlin-logging-jvm:7.0.3")
-    implementation("io.projectreactor.kafka:reactor-kafka:1.3.23")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("io.projectreactor:reactor-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    testImplementation("io.mockk:mockk:1.14.2")
 }
 
 kotlin {
@@ -48,9 +40,20 @@ kotlin {
     }
 }
 
+allOpen {
+    annotation("jakarta.persistence.Entity")
+    annotation("jakarta.persistence.MappedSuperclass")
+    annotation("jakarta.persistence.Embeddable")
+}
+
 tasks.withType<Test> {
-    useJUnitPlatform{
-        excludeTags ("TooLongTime")
-        excludeTags("ExternalIntegration")
-    }
+    useJUnitPlatform()
+}
+
+// JPA 어노테이션이 붙은 코틀린 클래스를 open 상태로 만들어서 상속 가능하게 처리
+// (코틀린은 기본적으로 모든 클래스가 파이널 상태라서 상속이 불가능함)
+allOpen {
+    annotation("jakarta.persistence.Entity")
+    annotation("jakarta.persistence.MappedSuperclass")
+    annotation("jakarta.persistence.Embeddable")
 }

@@ -1,0 +1,48 @@
+server:
+  port: 9292
+
+spring:
+  application:
+    name: wallet-service
+  config:
+    import:
+      - classpath:kafka-config.yml
+      - classpath:kafka-consumer-config.yml
+      - classpath:kafka-producer-config.yml
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql://localhost:3306/wallets?useUnicode=true&serverTimezone=Asia/Seoul
+      username: root
+      password: 1234
+    url: jdbc:mysql://localhost:3306/wallets?useUnicode=true&serverTimezone=Asia/Seoul
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+    open-in-view: false
+  sql:
+    init:
+      mode: never
+
+logging:
+  level:
+    org:
+      springframework:
+        transaction: trace
+        orm:
+          jpa: debug
+        kafka: trace
+
+kafka:
+  topics:
+    user:
+      registered: registered-user-request-v1
+  consumer:
+    group:
+      registered-user: registered-user-consumer-group
