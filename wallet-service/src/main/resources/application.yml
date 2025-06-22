@@ -41,8 +41,8 @@ logging:
 
 kafka:
   topics:
-    user:
-      registered: registered-user-request-v1
-  consumer:
-    group:
-      registered-user: registered-user-consumer-group
+    payment:
+      confirmed: payment-confirm-event-v1
+
+kafka-consumer-config:
+  group-id: wallet-service-group16

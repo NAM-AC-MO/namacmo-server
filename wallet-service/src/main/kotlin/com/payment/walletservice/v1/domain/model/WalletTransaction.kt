@@ -8,7 +8,7 @@ data class WalletTransaction (
   val walletId: Long,
   val amount: Money,
   val type: TransactionType,
-  val referenceId: Long,
+  val referenceId: String,
   val referenceType: ReferenceType,
   val orderId: String
 )

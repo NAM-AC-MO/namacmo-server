@@ -31,7 +31,7 @@ class JpaWalletTransactionEntity (
   val referenceType: String,
 
   @Column(name = "reference_id")
-  val referenceId: Long,
+  val referenceId: String,
 
   @Column(name = "idempotency_key")
   val idempotencyKey: String

@@ -5,7 +5,7 @@ import com.payment.walletservice.v1.domain.valueobject.Item
 import com.payment.walletservice.v1.domain.valueobject.ReferenceType
 
 class PaymentOrder (
-  val id: Long,
+  val id: String,
   val sellerId: Long,
   amount: Money,
   orderId: String

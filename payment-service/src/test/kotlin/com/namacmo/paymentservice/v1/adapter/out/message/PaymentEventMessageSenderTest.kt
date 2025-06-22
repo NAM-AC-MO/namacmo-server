@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import java.util.*
 
 @SpringBootTest
-@Tag("ExternalIntegration")
+//@Tag("ExternalIntegration")
 class PaymentEventMessageSenderTest(
     @Autowired private val paymentEventMessageSender: PaymentEventMessageSender,
     @Value("\${kafka.topics.payment.confirmed}") private val topic: String

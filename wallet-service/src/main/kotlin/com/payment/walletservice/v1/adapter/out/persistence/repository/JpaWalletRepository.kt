@@ -3,7 +3,9 @@ package com.payment.walletservice.v1.adapter.out.persistence.repository
 import com.namacmo.appcommon.domain.valueobject.Money
 import com.payment.walletservice.v1.adapter.out.persistence.entity.JpaWalletMapper
 import com.payment.walletservice.v1.adapter.out.persistence.exception.RetryExhaustedWithOptimisticLockingFailureException
+import com.payment.walletservice.v1.application.service.SettlementService
 import com.payment.walletservice.v1.domain.model.Wallet
+import org.slf4j.LoggerFactory
 import org.springframework.orm.ObjectOptimisticLockingFailureException
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.support.TransactionTemplate
@@ -15,6 +17,8 @@ class JpaWalletRepository (
   private val walletTransactionRepository: WalletTransactionRepository,
   private val transactionTemplate: TransactionTemplate
 ) : WalletRepository {
+  private val log = LoggerFactory.getLogger(JpaWalletRepository::class.java)
+
 
   override fun getWallets(sellerIds: Set<Long>): Set<Wallet> {
     return springDataJpaWalletRepository.findByUserIdIn(sellerIds)
@@ -25,6 +29,7 @@ class JpaWalletRepository (
   override fun save(wallets: List<Wallet>) {
     try {
       performSaveOperation(wallets)
+      log.info("performSaveOperation wallet ids={}", wallets.map { it.id })
     } catch (e: ObjectOptimisticLockingFailureException) {
       // @Version 에노테이션을 사용해서 동시성을 제어 시 쓰기 충돌이 발생하는 경우 (Srping 예외 추상화)
       retrySaveOperation(wallets)

@@ -28,7 +28,7 @@ import java.time.LocalDateTime
 import java.util.*
 
 @SpringBootTest
-//@Tag("TooLongTime")
+@Tag("TooLongTime")
 @Import(PaymentTestConfiguration::class)
 class PaymentRecoveryServiceTest(
     @Autowired private val loadPendingPaymentPort: LoadPendingPaymentPort,
