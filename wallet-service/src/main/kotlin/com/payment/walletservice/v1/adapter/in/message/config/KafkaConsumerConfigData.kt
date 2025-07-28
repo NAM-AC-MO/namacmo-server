@@ -1,4 +1,4 @@
-package com.payment.walletservice.v1.adapter.`in`.config
+package com.payment.walletservice.v1.adapter.`in`.message.config
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.context.properties.bind.ConstructorBinding

@@ -1,6 +1,5 @@
-package com.payment.walletservice.v1.adapter.`in`.config
+package com.payment.walletservice.v1.adapter.`in`.message.config
 
-import com.payment.walletservice.v1.adapter.out.persistence.config.KafkaConfigData
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.common.serialization.StringDeserializer
 import org.slf4j.LoggerFactory

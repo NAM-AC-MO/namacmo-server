@@ -1,5 +1,5 @@
 server:
-  port: 9292
+  port: 9393
 
 spring:
   application:
@@ -42,7 +42,7 @@ logging:
 kafka:
   topics:
     payment:
-      confirmed: payment-confirm-event-v1
+      confirmed: ledger-event-v1
 
 kafka-consumer-config:
-  group-id: wallet-service-group16
+  group-id: ledger-service-group
