@@ -17,8 +17,9 @@ class PaymentPersistentAdapter(
     private val paymentValidationRepository: PaymentValidationRepository,
     private val paymentOutboxRepository: PaymentOutboxRepository,
     private val paymentOrdersRepository: R2DBCPaymentOrderRepository
-): SavePaymentPort, PaymentStatusUpdatePort, PaymentValidationPort,
-    LoadPendingPaymentPort, LoadPendingPaymentEventMessagePort, PaymentOrderPort {
+) : SavePaymentPort, PaymentStatusUpdatePort, PaymentValidationPort,
+    LoadPendingPaymentPort, LoadPendingPaymentEventMessagePort, PaymentOrderPort,
+    LoadPaymentPort, CompletePaymentPort {
 
     override fun save(paymentEvent: PaymentEvent): Mono<Void> {
         return paymentRepository.save(paymentEvent)
@@ -46,5 +47,13 @@ class PaymentPersistentAdapter(
 
     override fun getPaymentOrders(orderId: String): Mono<PaymentOrders> {
         return paymentOrdersRepository.findByOrderId(orderId)
+    }
+
+    override fun getPayment(orderId: String): Mono<PaymentEvent> {
+        return paymentRepository.getPayment(orderId)
+    }
+
+    override fun complete(paymentEvent: PaymentEvent): Mono<Void> {
+        return paymentRepository.complete(paymentEvent)
     }
 }
